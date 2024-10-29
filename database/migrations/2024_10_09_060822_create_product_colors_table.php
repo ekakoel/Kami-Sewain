@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_colors', function (Blueprint $table) {
-            $table->engine = 'InnoDB'; // Pastikan engine InnoDB digunakan
             $table->id();
             $table->string('name');
             $table->string('color_code');

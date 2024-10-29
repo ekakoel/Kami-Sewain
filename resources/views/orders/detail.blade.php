@@ -51,7 +51,7 @@
                                         <div class="col-6 text-right">
                                             <p>
                                                 Duedate:<br>
-                                                <strong>{{ date('d M Y', strtotime('-7 days',strtotime($order->rental_start_date))) }}</strong><br>
+                                                <strong>{{ date('d M Y', strtotime($order->payment_duedate)) }}</strong><br>
                                                 Delivery Date:
                                                 <br><i>{{ date('d M Y', strtotime($order->shipping?->delivery_date)) }}</i><br>
                                                 Return Date:
@@ -117,7 +117,7 @@
                                             @endif
                                             <tr>
                                                 <td colspan="4" class="text-right"> <strong>Grand Total</strong></td>
-                                                <td class="text-right"> <strong>Rp {{ number_format($order->balance, 0, ',', '.') }}</strong></td>
+                                                <td class="text-right"> <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong></td>
                                             </tr>
                                             @if (count($receipt_paids)>0)
                                               @foreach ($receipt_paids as $nop=>$paid)

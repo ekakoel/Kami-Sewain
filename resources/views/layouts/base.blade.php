@@ -61,10 +61,10 @@
 
     <script src="{{asset('js/app.js')}}"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.js"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/popper.js') }}"></script>
 
     <script src="{{ asset('js/splide.min.js') }}"></script>
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>

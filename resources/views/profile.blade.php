@@ -42,7 +42,7 @@
                 <div class="card-box m-b-18">
                     <div class="card-box-header d-flex justify-content-between flex-column flex-xl-row">
                         <div class="card-box-title">Profile Details</div>
-                        <span class="{{ $user->status == "Active"?"status-active":"status-blocked"; }}">{{ $user->status }}</span>
+                        <span class="{{ $user->status == "Active"?"status-active":"status-blocked"; }}">{{ $user->status == "Pending"?"Unverified":$user->status; }}</span>
                     </div>
                   <div class="card-box-body">
                     <p><strong>Name</strong><br> 

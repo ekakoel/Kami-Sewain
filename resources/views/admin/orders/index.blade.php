@@ -45,7 +45,7 @@
                                 <tr>
                                     <td class="table-plus">{{ ++$no }}</td>
                                     <td>{{ $order->order_no }}</td>
-                                    <td>{{ date('d M Y', strtotime($order->rental_start_date)) }} - {{ date('d M Y', strtotime($order->rental_start_date)) }}</td>
+                                    <td>{{ date('d M Y', strtotime($order->rental_start_date)) }} - {{ date('d M Y', strtotime($order->rental_end_date)) }}</td>
                                     <td>Rp {{ number_format($order->total_price, 0, ",", ".") }} </td>
                                     <td>{{ $order->status }} </td>
                                     <td>
@@ -86,7 +86,7 @@
                                 <tr>
                                     <td class="table-plus {{ $duedate < $today?"danger-text":"" }}">{{ ++$pno }}</td>
                                     <td class="{{ $duedate < $today?"danger-text":"" }}" >{{ $p_order->order_no }}</td>
-                                    <td class="{{ $duedate < $today?"danger-text":"" }}">{{ date('d M Y', strtotime($p_order->rental_start_date)) }} - {{ date('d M Y', strtotime($p_order->rental_start_date)) }}</td>
+                                    <td class="{{ $duedate < $today?"danger-text":"" }}">{{ date('d M Y', strtotime($p_order->rental_start_date)) }} - {{ date('d M Y', strtotime($p_order->rental_end_date)) }}</td>
                                     <td class="{{ $duedate < $today?"danger-text":"" }}">Rp {{ number_format($p_order->total_price, 0, ",", ".") }} </td>
                                     <td class="{{ $duedate < $today?"danger-text":"" }}">{{ $p_order->status }} </td>
                                     <td class="{{ $duedate < $today?"danger-text":"" }}">
@@ -123,7 +123,7 @@
                                 <tr>
                                     <td class="table-plus">{{ ++$oh }}</td>
                                     <td>{{ $h_order->order_no }}</td>
-                                    <td>{{ date('d M Y', strtotime($h_order->rental_start_date)) }} - {{ date('d M Y', strtotime($h_order->rental_start_date)) }}</td>
+                                    <td>{{ date('d M Y', strtotime($h_order->rental_start_date)) }} - {{ date('d M Y', strtotime($h_order->rental_end_date)) }}</td>
                                     <td>Rp {{ number_format($h_order->total_price, 0, ",", ".") }} </td>
                                     <td>{{ $h_order->status == "Payment"?"Canceled":$h_order->status; }}</td>
                                     <td>

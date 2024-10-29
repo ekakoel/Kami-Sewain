@@ -60,7 +60,17 @@
             </form>
         </div>
     </div>
+    <div id="loading" style="display: none;">
+        <div class="spinner-container">
+            <i class="fas fa-spinner fa-spin"></i> <!-- Ikon berputar -->
+        </div>
+    </div>
     <script>
+        document.querySelectorAll('.sign-form').forEach(form => {
+            form.addEventListener('submit', function() {
+                document.getElementById('loading').style.display = 'flex'; // Tampilkan elemen loading
+            });
+        });
         // JavaScript untuk toggle password visibility
         document.querySelectorAll('.toggle-password').forEach(item => {
             item.addEventListener('click', function () {

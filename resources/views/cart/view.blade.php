@@ -45,7 +45,7 @@
                                                 <td>
                                                     <div class="cart-item">
                                                         {{ $product['name'] }}<br>
-                                                        <img src="{{ isset($product['image']) ? asset('storage/images/products/' . $product['image']) : asset('images/products/default.jpeg') }}" alt="{{ $product['name'] }}" width="60" class="img-thumbnail">
+                                                        <img src="{{ isset($product['image']) ? asset('images/products/' . $product['image']) : asset('images/products/default.jpeg') }}" alt="{{ $product['name'] }}" width="60" class="img-thumbnail">
                                                     </div>
                                                 </td>
                                                 <td>Rp {{ number_format($product['price'], 0, ",", ".") }}</td>

@@ -36,9 +36,12 @@ class ProductColorController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'color_code' => 'required|string|max:255',
         ]);
+        // dd($request->input('color_code'));
         $color = ProductColor::findOrFail($id);
         $color->name = $request->input('name');
+        $color->color_code = $request->input('color_code');
         $color->save();
 
         return redirect()->back()->with('success', 'Color updated successfully');

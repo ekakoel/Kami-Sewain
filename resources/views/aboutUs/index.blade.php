@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img src="{{ asset('storage/images/business/wedding_decoration.jpeg') }}" alt="Wedding Decor" class="img-landscape img-fluid rounded">
+                            <img src="{{ asset('images/business/wedding_decoration.jpeg') }}" alt="Wedding Decor" class="img-landscape img-fluid rounded">
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                                     <div class="swiper-slide" id="popularProduct">
                                         <div class="card">
                                             <div class="card-img">
-                                                <img src="{{ asset('storage/images/products/'.$popular_product->cover) }}" class="card-img-top" alt="{{ $popular_product->category }}">
+                                                <img src="{{ asset('images/products/'.$popular_product->cover) }}" class="card-img-top" alt="{{ $popular_product->category }}">
                                             </div>
                                         </div>
                                     </div>

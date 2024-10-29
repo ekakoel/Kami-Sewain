@@ -197,6 +197,7 @@
     </main>
     @include('layouts.partials.footer-secondary')
     <script>
+        
         // Mengatur min date untuk Rental Start Date
         const rentalStartDateInput = document.getElementById('rental_start_date');
         const rentalEndDateInput = document.getElementById('rental_end_date');

@@ -56,7 +56,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         // Redirect ke halaman dashboard setelah berhasil registrasi
-        return redirect()->route('home.index')->with('success', 'Registrasi berhasil! Selamat datang!');
+        return redirect()->route('home.index')->with('success', 'Registration successful! Welcome!');
     }
 
    
@@ -74,7 +74,7 @@ class AuthController extends Controller
         // Cek apakah kredensial valid dan login
         if (Auth::attempt($credentials)) {
             // Redirect ke halaman dashboard jika berhasil login
-            return redirect()->route('home.index')->with('success', 'Login berhasil!');
+            return redirect()->route('home.index')->with('success', 'Login successful!');
         }
 
         // Jika login gagal

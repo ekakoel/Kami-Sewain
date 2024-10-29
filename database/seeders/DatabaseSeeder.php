@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         Admin::factory()->create([
             'username'=>'andrew',
             'fullname'=>'Andrew',
-            'email'=>'e-admin@balikamitour.com',
+            'email'=>'admin@kamisewain.com',
             'password'=> '$2y$10$E1vptrCL.JXjaJAqUFr8TeYUYJCY56u5r1pyi4t046hhRVofS9pDq',
         ]);
         $this->call(BlogCategorySeeder::class);

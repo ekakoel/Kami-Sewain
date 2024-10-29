@@ -7,6 +7,7 @@ use App\Models\Orders;
 use App\Models\Checkout;
 use App\Models\Promotion;
 use App\Models\Shippings;
+use App\Models\OrderReceipt;
 use App\Models\PageProperty;
 use Illuminate\Http\Request;
 use App\Models\BusinessProfile;
@@ -47,7 +48,8 @@ class OrdersController extends Controller
             $now = Carbon::now();
             $user_id = Auth::user()->id;
             $orders = Orders::with('products')->where('user_id',$user_id)->where('status','!=','archived')->where('rental_end_date','>=',$now)->get();
-            $receipt_paids = $order->receipts->where('status','Paid');
+            $receipt_paids = OrderReceipt::where('order_id',$order->id)->where('status','Valid')->get();
+            // $receipt_paids = $order->receipts->where('status','Paid');
             return view('orders.detail', compact(
                 'now',
                 'order',
@@ -61,17 +63,7 @@ class OrdersController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function create_order(Request $request)
     {
         $cart = session()->get('cart', []);
@@ -116,6 +108,8 @@ class OrdersController extends Controller
             $discount_amount = NULL;
         }
         $corders = $cord + 1;
+        $rental_start_date = date('Y-m-d',strtotime($request->rental_start_date));
+        $rental_end_date = date('Y-m-d',strtotime($request->rental_end_date));
         $orderno = "ORD-".$date."-".$user_id."-".$corders;
         $rentalStartDate = Carbon::parse($validated['rental_start_date']);
         $rentalEndDate = Carbon::parse($validated['rental_end_date']);
@@ -139,8 +133,8 @@ class OrdersController extends Controller
             'order_no' => $orderno,
             'user_id' => $user_id,
             'bank_id' => $request->bank_id,
-            'rental_start_date' => $rentalStartDate,
-            'rental_end_date' => $rentalEndDate,
+            'rental_start_date' => $rental_start_date,
+            'rental_end_date' => $rental_end_date,
             'rental_duration' => $rentalDuration,
             'total' => $total,
             'total_price' => $total_price,
@@ -169,11 +163,12 @@ class OrdersController extends Controller
             'city' => $validated['city'],
             'postcode' => $validated['postcode'],
             'country' => $validated['country'],
-            'delivery_date' => $validated['rental_start_date'],
-            'return_date' => $validated['rental_end_date'],
+            'delivery_date' => $rental_start_date,
+            'return_date' => $rental_end_date,
             'status' => $shipping_status,
         ]);
         $shipping->save();
+        // dd($order, $shipping);
         // Hapus cart dari session setelah order tersimpan
         session()->forget('cart');
         session()->forget('promotion');

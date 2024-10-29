@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="/../vendors/datatables/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" type="text/css" href="/../vendors/datatables/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="/../vendors/datatables/css/style.css">
-
+    <link rel="stylesheet" type="text/css" href="/../vendors/jquery-asColorPicker/dist/css/asColorPicker.css">
 </head>
 
 <body>
@@ -162,6 +162,11 @@
     <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.js') }}" crossorigin="anonymous"></script>
     <script src="{{ asset('dashboard/js/scripts.js') }}"></script>
+
+    <script src="/../vendors/jquery-asColor/dist/jquery-asColor.js"></script>
+	<script src="/../vendors/jquery-asGradient/dist/jquery-asGradient.js"></script>
+	<script src="/../vendors/jquery-asColorPicker/jquery-asColorPicker.js"></script>
+	<script src="{{ asset('js/colorpicker.js') }}"></script>
     {{-- <script src="{{ asset('/js/custom.js') }}"></script> --}}
 </body>
 

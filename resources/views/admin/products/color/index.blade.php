@@ -62,26 +62,26 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="myLargeModalLabel">Edit Color</h4>
+                                            <h4 class="modal-title">Edit Color</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('admin.color.update',$color->id) }}" method="POST" id="updateColorForm{{ $color->id }}" enctype="multipart/form-data">
+                                            <form id="updateColorForm{{ $color->id }}" action="{{ route('admin.color.update', $color->id) }}" method="POST"  enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PATCH')
                                                 <div class="form-group">
                                                     <label for="name">Color Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{ $color->name }}" required>
+                                                    <input type="text" class="form-control" name="name" value="{{ $color->name }}" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="color_code">Color Code</label>
-                                                    <input type="text" class="form-control" id="color_code" name="color_code" value="{{ $color->color_code }}" required>
+                                                    <input type="text" name="color_code" class="form-control" value="{{ $color->color_code }}" required>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn button-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-                                            <button type="submit" form="updateColorForm{{ $color->id }}" class="btn button-secondary" id="saveColorButton"><i class="fas fa-save"></i> Save</button>
+                                            <button type="submit" form="updateColorForm{{ $color->id }}" class="btn button-secondary"><i class="fas fa-save"></i> Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -106,11 +106,11 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Color Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <input type="text" class="form-control" name="name" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="color_code">Color Code</label>
-                                        <input type="text" class="form-control" id="color_code" name="color_code" required>
+                                        <input type="text" class="form-control" name="color_code" required>
                                     </div>
                                 </form>
                             </div>

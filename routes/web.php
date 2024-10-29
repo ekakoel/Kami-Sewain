@@ -234,7 +234,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             // COLORS
             Route::get('/colors', [ProductColorController::class, 'index'])->name('admin.colors.index');
             Route::post('/color/store', [ProductColorController::class, 'store'])->name('admin.color.store');
-            Route::patch('/color/{id}', [ProductColorController::class, 'update'])->name('admin.color.update');
+            Route::patch('/color/update/{id}', [ProductColorController::class, 'update'])->name('admin.color.update');
             Route::delete('/colors/{id}', [ProductColorController::class, 'destroy'])->name('admin.color.destroy');
             
             // ORDERS

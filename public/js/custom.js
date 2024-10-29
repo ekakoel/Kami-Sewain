@@ -68,7 +68,12 @@ window.onload = function() {
     };
 };
 
-
+// date picker
+$('.date-picker').datepicker({
+    language: 'en',
+    autoClose: true,
+    dateFormat: 'mm/dd/yyyy',
+});
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();

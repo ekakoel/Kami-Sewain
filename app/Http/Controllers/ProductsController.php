@@ -59,7 +59,7 @@ class ProductsController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Rating berhasil diberikan!');
+        return redirect()->back()->with('success', 'Rating submitted successfully!');
     }
 
 
