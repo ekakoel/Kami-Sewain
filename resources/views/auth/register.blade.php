@@ -1,52 +1,82 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.base')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+@section('title', 'Register')
+
+@section('body')
+<!-- main content -->
+<main class="main main--sign" data-bg="img/bg/bg.png">
+    <!-- registration form -->
+    <div class="sign">
+        <div class="sign-content">
+            <form action="/register-perform" method="POST" class="sign-form">
+                @csrf
+                <a href="{{ route('home.index') }}" class="sign-logo">
+                    <div class="logo">
+                        <div class="logo-text">
+                            Kami Sewain
+                        </div>
+                        <div class="logo-caption">
+                            Exclusive Wedding Equipment
+                        </div>
+                    </div>
+                </a>
+
+                @if ($errors->has('name'))
+                    <span class="text-danger text-center">{{ $errors->first('name') }}</span>
+                @endif
+                <div class="sign-group">
+                    <input type="text" name="name" class="sign-input" placeholder="Name" value="{{ old('name') }}">
+                </div>
+
+                @if ($errors->has('email'))
+                    <span class="text-danger text-center">{{ $errors->first('email') }}</span>
+                @endif
+                <div class="sign-group">
+                    <input type="email" name="email" class="sign-input" placeholder="Email" value="{{ old('email') }}">
+                </div>
+
+                @if ($errors->has('telephone'))
+                    <span class="text-danger text-center">{{ $errors->first('telephone') }}</span>
+                @endif
+                <div class="sign-group">
+                    <input type="text" name="telephone" class="sign-input" placeholder="Telephone" value="{{ old('telephone') }}">
+                </div>
+                @if ($errors->has('password'))
+                    <span class="text-danger text-center">{{ $errors->first('password') }}</span>
+                @endif
+                <div class="sign-group">
+                    <input id="password" type="password" name="password" class="sign-input" placeholder="Password" value="{{ old('password') }}">
+                    <span toggle="#password" class="fa fa-fw fa-eye field-icon-login toggle-password"></span>
+                </div>
+                @if ($errors->has('password_confirmation'))
+                    <span class="text-danger text-center">{{ $errors->first('password_confirmation') }}</span>
+                @endif
+                <div class="sign-group">
+                    <input id="passwordConfirm" type="password" name="password_confirmation" class="sign-input" placeholder="Confirm Password">
+                    <span toggle="#passwordConfirm" class="fa fa-fw fa-eye field-icon-login toggle-password"></span>
+                </div>
+                <button class="sign-btn" type="submit"><span>Register</span></button>
+                <span class="sign-text">Do you already have an account? <a href="/login">Log in!</a></span>
+            </form>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+    <script>
+        // JavaScript untuk toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(item => {
+            item.addEventListener('click', function () {
+                let input = document.querySelector(this.getAttribute('toggle'));
+                if (input.getAttribute('type') === 'password') {
+                    input.setAttribute('type', 'text');
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    input.setAttribute('type', 'password');
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
+</main>
+<!-- end main content -->
+@endsection
