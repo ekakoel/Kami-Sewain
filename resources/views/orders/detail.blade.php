@@ -205,7 +205,7 @@
                             
                             @if (count($order->receipts)>0)
                                 @foreach ($order->receipts as $no=>$receipt)
-                                    <div class="card-box-card">
+                                    <div class="card-box-card {{ $receipt->status == "Invalid"?"bg-danger":"" }}">
                                         <div class="row">
                                             <div class="col-12"><strong>Receipt {{ ++$no }}</strong></div>
                                             <div class="col-6">Payment Date:</div>
@@ -234,7 +234,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="payment_date">Payment Date</label>
-                                            <input type="date" name="payment_date" id="payment_date" class="form-control" required>
+                                            <input type="text" name="payment_date" id="payment_date" class="form-control date-picker" placeholder="Select Date" required readonly>
                                         </div>
                                     
                                         <div class="form-group">
@@ -248,7 +248,7 @@
                                         </div>
                                         
                                         <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                        <button type="submit" class="btn btn-primary">Submit Receipt</button>
+                                        <button type="submit" class="btn button-secondary">Submit Receipt</button>
                                     </form>
                                 @endif
                             @endif

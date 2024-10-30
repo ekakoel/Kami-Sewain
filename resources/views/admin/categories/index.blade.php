@@ -82,7 +82,7 @@
                                                 <div class="form-group">
                                                     <label for="icon{{ $no }}">Icon Image</label>
                                                     <!-- Tampilkan ikon sebelumnya -->
-                                                    <img id="EditIconPreview{{ $no }}" src="{{ asset('storage/images/categories/'.$category->icon) }}" alt="Icon Preview" style="margin-top: 10px; width: 100px; height: auto; margin-bottom:18px;">
+                                                    <img id="EditIconPreview{{ $no }}" src="{{ asset('images/categories/'.$category->icon) }}" alt="Icon Preview" style="margin-top: 10px; width: 100px; height: auto; margin-bottom:18px;">
                                                     <!-- Input file untuk memperbarui ikon -->
                                                     <input type="file" class="form-control" id="icon{{ $no }}" name="icon" accept="image/*" data-preview="EditIconPreview{{ $no }}">
                                                 </div>

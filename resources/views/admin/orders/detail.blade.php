@@ -20,7 +20,7 @@
                 <hr class="hr-admin-navigation">
                 <div class="admin-navigation-list-container">
                     <div class="admin-navigation-list"><a href="/admin/orders">Orders</a></div>
-                    <div class="admin-navigation-list active"><a href="/admin/orders">{{ $order->order_no }}</a></div>
+                    <div class="admin-navigation-list active">{{ $order->order_no }}</div>
                 </div>
             </div>
             
@@ -243,7 +243,7 @@
                                                         </div>
                                                         <div class="modal-body-section">
                                                             <div class="modal-image-section">
-                                                                <img class="receipt-img" src="{{ asset('storage/images/orders/'.$receipt->receipt_image) }}" alt="Order Receipt">
+                                                                <img class="receipt-img" src="{{ asset('images/orders/'.$receipt->receipt_image) }}" alt="Order Receipt">
                                                             </div>
                                                             <div class="modal-detail-section">
                                                                 <div class="row">
@@ -309,7 +309,7 @@
                                                     @csrf
                                                     <div class="form-group">
                                                         <label for="payment_date">Payment Date</label>
-                                                        <input type="date" name="payment_date" id="payment_date" class="form-control" required>
+                                                        <input type="text" name="payment_date" id="payment_date" class="form-control date-picker" placeholder="Select Date" required readonly>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="amount">Amount</label>

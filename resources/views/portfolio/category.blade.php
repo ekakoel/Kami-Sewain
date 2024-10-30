@@ -15,7 +15,7 @@
                 @foreach ($posts as $post)
                     <div class="col-md-3 mb-4">
                         <div class="card h-100 shadow border-0">
-                            <img class="post-img" src="{{ asset('storage/images/portfolio/'.$post->featured_image) }}" alt="..." />
+                            <img class="post-img" src="{{ asset('images/portfolio/'.$post->featured_image) }}" alt="..." />
                             <div class="card-body">
                                 @if($post->categories)
                                     <div class="badge-primary m-b-8">

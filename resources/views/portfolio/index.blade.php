@@ -19,7 +19,7 @@
                         <div class="col-lg-3 m-b-18">
                             <a href="/portfolio/{{ $post->slug }}">
                                 <div class="card h-100 shadow border-0">
-                                    <img class="post-img" src="{{ asset('storage/images/portfolio/'.$post->featured_image) }}" alt="Image {{ $post->title }}" />
+                                    <img class="post-img" src="{{ asset('images/portfolio/'.$post->featured_image) }}" alt="Image {{ $post->title }}" />
                                     <div class="card-body">
                                         <div class="badge-primary m-b-8">
                                             {{ $post->categories?->name }}

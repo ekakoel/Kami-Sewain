@@ -72,5 +72,11 @@
     <script src="{{ asset('js/smooth-scrollbar.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+
+    <script src="{{ asset('vendors/datatables/scripts/core.js') }}"></script>
+    {{-- <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('dashboard/js/scripts.js') }}"></script> --}}
+    {{-- <script src="{{ asset('vendors/scripts/script.min.js') }}"></script> --}}
   </body>
 </html>

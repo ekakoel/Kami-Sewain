@@ -25,6 +25,6 @@ class Galleries extends Model
     // Optional: Accessor for image URL
     public function getImageUrlAttribute(): string
     {
-        return asset('storage/images/galleries/' . $this->image);
+        return asset('images/galleries/' . $this->image);
     }
 }

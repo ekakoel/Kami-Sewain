@@ -39,7 +39,7 @@
 
 
                 <button class="sign-btn" type="submit"><span>Log in</span></button>
-                <a href="/forgot-password">Forgot Password</a>
+                <a href="{{ route('password.request') }}">Forgot Password</a>
                 <span class="sign-text">Don't have an account yet?<a href="/register"> Register!</a></span>
             </form>
         </div>

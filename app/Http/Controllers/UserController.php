@@ -61,6 +61,14 @@ class UserController extends Controller
         ]);
         return redirect()->route('user.show')->with('success', 'Profile updated successfully');
     }
+    public function update_status_user(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update([
+            'status' => $request->status,
+        ]);
+        return back()->with('success', 'User status changed successfully');
+    }
     
     public function updatePassword(Request $request)
     {
@@ -87,27 +95,31 @@ class UserController extends Controller
         return back()->with('success', 'Password updated successfully.');
     }
 
+    public function updateImage(Request $request)
+    {
+       
+        // dd($request->profile_img);
+        $user = Auth::user();
+        $directory = public_path('images/profile/');
+        if ($request->hasFile('profile_img')) {
+            if ($user->profile_img) {
+                $oldCoverPath = $directory . $user->profile_img;
+                if (file_exists($oldCoverPath)) {
+                    unlink($oldCoverPath); // Menghapus file lama
+                }
+            }
+            $user_profile_img = time() . '_profile_img_user_'.$user->name.".". $request->profile_img->getClientOriginalExtension();
+            $request->profile_img->move('images/profile', $user_profile_img);
+            $user->profile_img = $user_profile_img;
+        }
 
-    // use Illuminate\Support\Facades\Hash;
+        
+        $user->update([
+            'profile_img' => $user_profile_img,
+        ]);
+        
 
-    // $password = '123456789';
-    // $hashedPassword = '$2y$10$657r/hxNbYxw8YEZKOuVru6y1CcRt54z1n15VTo5KkkUJMWyZOsTu';
-
-    // if (Hash::check($password, $hashedPassword)) {
-    //     echo "Password cocok!";
-    // } else {
-    //     echo "Password tidak cocok.";
-    // }
-
-
-    // $user = App\Models\User::find(1);
-    // $passwordInput = '1234567890';
-    // $storedHash = $user->password;
-    
-    // if (Hash::check($passwordInput, $storedHash)) {
-    //     echo "Password cocok!";
-    // } else {
-    //     echo "Password tidak cocok.";
-    // }
+        return redirect()->back()->with('success', 'Profile image updated successfully!');
+    }
 
 }

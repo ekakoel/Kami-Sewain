@@ -1,9 +1,11 @@
 @charset "utf-8";
 a{
   text-decoration: none !important;
+  color: #004561 !important;
 }
 a:hover{
   text-decoration: none !important;
+  color: #00668f !important;
 }
 h1,h2,h3,h4,h5,h6{
   margin: 0 0 18px 0 !important;
@@ -39,6 +41,7 @@ aside{
   padding-top: 18px !important;
 }
 .profile-img{
+  position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 8px;
@@ -47,6 +50,18 @@ aside{
   width: 100%;
   object-fit: cover;
   aspect-ratio: 1.1;
+}
+.profile-img .edit-btn-icon{
+  position: absolute;
+    width: 33px;
+    height: 33px;
+    border-radius: 27px;
+    background-color: #ffffff;
+    text-align: center;
+    align-content: center;
+    top: 8px;
+    right: 8px;
+    z-index: 9;
 }
 
 .field-icon {
@@ -382,11 +397,26 @@ header{
 .form-control {
   height: fit-content !important;
 }
+.form-control:focus {
+  color: #495057;
+  background-color: #fff !important;
+  border-color: #80bdff !important;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+}
+.form-control[readonly] {
+  background-color: #ffffff !important;
+  opacity: 1;
+}
 .filter-container {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
+  background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 7px #8080808c;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .filter-menu {
@@ -1445,7 +1475,9 @@ label{
     animation: fadeInBottom 1s ease forwards; /* Durasi animasi 1 detik */
 }
 
-
+.card{
+  border: 1px solid #b7b7b7 !important;
+}
   .card-content{
     width: 100%;
     background-color: white;
@@ -1458,6 +1490,7 @@ label{
   .card:is(:hover,:active){
     box-shadow: none;
   }
+
   .card img{
     max-width: inherit;
     cursor: pointer;
@@ -2102,12 +2135,15 @@ label{
       color: white !important;
     }
     .button-primary,.button-secondary,.button-dark,.button-danger{
+      font-family: sans-serif;
       padding: 8px 17px !important;
       border-radius: 5px !important;
       font-style: normal;
       font-size: 0.9rem !important;
+      font-weight: 600;
       box-shadow: -2px 3px 3px -2px #10101078;
       align-content: center !important;
+      text-transform: uppercase;
     }
     .button-primary:hover,.button-secondary:hover,.button-dark:hover,.button-danger:hover{
       box-shadow: -2px 3px 3px -2px #10101078;
@@ -2154,7 +2190,7 @@ label{
     .button-delete:focus,
     .button-delete:hover {
         background: #ecf0f4;
-        color: #1b00ff
+        color: #0d6efd
     }
     .grid-container{
       display: grid;
@@ -2202,7 +2238,7 @@ label{
 
 
     .header-container{
-      background-image: linear-gradient(360deg, #272727, #575757);
+      background-image: linear-gradient(340deg, #3f9fc6, #ffbdbd);
     }
     .header-caption{
       text-align: center;
@@ -2211,14 +2247,14 @@ label{
     .header-title{
       font-size: 3rem;
       text-transform: uppercase;
-      color: white;
+      color: #ffffff;
       font-weight: 700;
       line-height: 1;
       margin-bottom: 26px;
     }
     .header-caption p{
       font-size: 1.1rem;
-      color: #a9a9a9;
+      color: #ffffff;
       line-height: 1.5;
       font-style: italic;
     }
@@ -2529,9 +2565,11 @@ label{
     border: 1px solid #cfcfcf;
   }
   .admin-navigation .admin-navigation-title{
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1;
     font-weight: 600;
+    text-transform: uppercase;
+    color: #636363;
   }
   .admin-navigation .hr-admin-navigation{
     padding: 0 !important;

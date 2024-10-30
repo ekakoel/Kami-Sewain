@@ -40,7 +40,7 @@ class CategoriesController extends Controller
     // Pastikan file ada
     if ($request->hasFile('icon')) {
         $iconName = time() . '.' . $request->file('icon')->extension();
-        $request->file('icon')->move(public_path('storage/images/categories/'), $iconName);
+        $request->file('icon')->move('images/categories/', $iconName);
 
         // Membuat kategori baru
         $category = new Categories();
@@ -83,13 +83,13 @@ class CategoriesController extends Controller
         // Jika ikon diperbarui
         if ($request->hasFile('icon')) {
             // Hapus ikon lama jika ada
-            if ($category->icon && file_exists(public_path('storage/images/categories/' . $category->icon))) {
-                unlink(public_path('storage/images/categories/' . $category->icon));
+            if ($category->icon && file_exists('images/categories/' . $category->icon)) {
+                unlink('images/categories/' . $category->icon);
             }
 
             // Upload ikon baru
             $iconName = time() . '.' . $request->icon->extension();
-            $request->icon->move(public_path('storage/images/categories/'), $iconName);
+            $request->icon->move('images/categories/', $iconName);
             $category->icon = $iconName; // Simpan nama ikon baru
         }
 
@@ -110,8 +110,8 @@ class CategoriesController extends Controller
         if (!$category) {
             return response()->json(['error' => 'Category not found'], 404);
         }
-        if (file_exists(public_path('storage/images/categories/' . $category->icon))) {
-            unlink(public_path('storage/images/categories/' . $category->icon));
+        if (file_exists(public_path('images/categories/' . $category->icon))) {
+            unlink(public_path('images/categories/' . $category->icon));
         }
         $category->delete();
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully');

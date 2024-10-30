@@ -18,7 +18,7 @@
 
                             <article class="blog-post">
                                 @if($post->featured_image)
-                                    <img src="{{ asset('storage/images/portfolio/' . $post->featured_image) }}" class="post-img img-fluid rounded mb-4" alt="{{ $post->title }}">
+                                    <img src="{{ asset('images/portfolio/' . $post->featured_image) }}" class="post-img img-fluid rounded mb-4" alt="{{ $post->title }}">
                                 @endif
                                 <h1 class="mb-3">{{ $post->title }}</h1>
                                 <div class="post-meta mb-3 text-muted">

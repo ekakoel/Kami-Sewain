@@ -36,7 +36,7 @@
                                 @endif
                             </div>
                             <div class="post-cover-image">
-                                <img src="{{ asset('storage/images/portfolio/'.$portfolio->featured_image) }}" alt="{{ $portfolio->title }}" class="img-fluid rounded">
+                                <img src="{{ asset('images/portfolio/'.$portfolio->featured_image) }}" alt="{{ $portfolio->title }}" class="img-fluid rounded">
                             </div>
                             <div>
                                 {!! $portfolio->content !!}

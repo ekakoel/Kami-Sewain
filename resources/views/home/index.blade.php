@@ -9,13 +9,13 @@
                 <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block" src="{{ asset('storage/images/slider/slider_01.jpeg') }}" alt="kami sewain table" />
+                            <img class="d-block" src="{{ asset('images/slider/slider_01.jpeg') }}" alt="kami sewain table" />
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block" src="{{ asset('storage/images/slider/slider_02.jpeg') }}" alt="kami sewain table" />
+                            <img class="d-block" src="{{ asset('images/slider/slider_02.jpeg') }}" alt="kami sewain table" />
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block" src="{{ asset('storage/images/slider/slider_03.jpeg') }}" alt="kami sewain table" />
+                            <img class="d-block" src="{{ asset('images/slider/slider_03.jpeg') }}" alt="kami sewain table" />
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                 @foreach ($categories as $category)
                     <div class="service-item active card-fade-in">
                         <div class="service-item">
-                            <img onclick="openModal({{ $category->id }})" class="zoom-img" src="{{ asset('/storage/images/categories/'.$category->icon) }}" alt="Icon {{ $category->name }}">
+                            <img onclick="openModal({{ $category->id }})" class="zoom-img" src="{{ asset('/images/categories/'.$category->icon) }}" alt="Icon {{ $category->name }}">
                             <p>{{ $category->name }}</p>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             <div class="product-modal-body">
                                 <div class="product-image-section">
                                     <div class="product-large-image">
-                                        <img id="mainImage{{ $category->id }}" src="{{ asset('/storage/images/categories/image/'.$category->icon) }}" alt="{{ $category->name }}">
+                                        <img id="mainImage{{ $category->id }}" src="{{ asset('/images/categories/image/'.$category->icon) }}" alt="{{ $category->name }}">
                                     </div>
                                 </div>
                                 <div class="product-details-section">
@@ -98,7 +98,7 @@
                 @foreach ($popularProducts as $index => $popular_product)
                     <div class="card card-fade-in card-fade-in-{{ $index + 1 }}">
                         <div class="card-img" onclick="openModalProduct({{ $popular_product->id }})">
-                            <img src="{{ asset('storage/images/products/'.$popular_product->cover) }}" class="product-img" alt="{{ $popular_product->category?->name }}">
+                            <img src="{{ asset('images/products/'.$popular_product->cover) }}" class="product-img" alt="{{ $popular_product->category?->name }}">
                             <div class="badge-container">
                                 <span class="badge-dark">{{ $popular_product->category?->name }}</span>
                             </div>
@@ -128,25 +128,25 @@
                             <div class="product-modal-body">
                                 <div class="product-image-section">
                                     <div class="product-large-image">
-                                        <img id="mainImage{{ $popular_product->id }}" src="{{ asset('storage/images/products/'.$popular_product->cover) }}" alt="{{ $popular_product->alt }}">
+                                        <img id="mainImage{{ $popular_product->id }}" src="{{ asset('images/products/'.$popular_product->cover) }}" alt="{{ $popular_product->alt }}">
                                     </div>
                                     <div class="rating-like-modal">
                                         <span class="like-count" id="like-count-{{ $popular_product->id }}" {{ $popular_product->likes()->count() == 0 ? 'style=display:none;' : '' }}>
-                                            <i class="fa fa-heart-o" aria-hidden="true"></i> {{ $popular_product->likes()->count() }}
+                                            <i class="far fa-heart" aria-hidden="true"></i> {{ $popular_product->likes()->count() }}
                                         </span>
                                         <span class="like-count" id="like-count-{{ $popular_product->id }}" {{ $popular_product->averageRating == 0 ? 'style=display:none;' : '' }}>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 1) }}
+                                            <i class="far fa-star" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 1) }}
                                         </span>
                                     </div>
                                     <div class="product-thumbnails">
                                         @foreach ($popular_product->secondaryImages as $thumbnail)
-                                            <img src="{{ asset('/storage/images/product/chair/'.$thumbnail->url) }}" alt="{{ $thumbnail->alt }}" class="product-thumbnail" onclick="changeImage({{ $popular_product->id }}, '{{ asset('/storage/images/product/chair/'.$thumbnail->url) }}',this)">
+                                            <img src="{{ asset('/images/product/'.$thumbnail->url) }}" alt="{{ $thumbnail->alt }}" class="product-thumbnail" onclick="changeImage({{ $popular_product->id }}, '{{ asset('/images/product/'.$thumbnail->url) }}',this)">
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="product-details-section">
                                     <h2>{{ $popular_product->name }}</h2>
-                                    <p><span>{{ $popular_product->material }} - {{ $popular_product->type }}</span></p>
+                                    <p><span>{{ $popular_product->material?->name }} - {{ $popular_product->model?->name }}</span></p>
                                     <p>{{ $popular_product->description }}</p>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -228,36 +228,6 @@
                 </div>
             </div>
          @endif
-        {{-- PRODUCT SLIDER --}}
-        {{-- <div id="productCategories" class="section-container">
-            <div class="section-head">
-                <div class="section-title">Product Category</div>
-                <div class="section-subtitle">Discover our curated selection of top product type, carefully chosen to meet your needs and interests.</div>
-            </div>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($products as $product)
-                        <div class="swiper-slide">
-                                <a href="/product/{{ $product->id }}">
-                                <div class="slider-card">
-                                    <img src="{{ asset('images/products/'.$product->cover) }}" alt="{{ $product->name }}">
-                                </div>
-                                <div class="slider-card-caption text-center">
-                                    <h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->price }}</p>
-                                    
-                                </div>
-                                <div class="slider-card-overlay"></div>
-                            </a>
-                            </div>
-                    @endforeach
-                </div>
-            
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div> --}}
         {{-- Portfolio --}}
         <section id="portfolio" class="section-container">
             <div class="section-head">
@@ -268,7 +238,7 @@
                     @foreach ($latestPosts as $post)
                         <div class="col-lg-3 m-b-18">
                             <div class="card h-100 shadow border-0 card-fade-in">
-                                <img class="post-img" src="{{ asset('storage/images/portfolio/'.$post->featured_image) }}" alt="..." />
+                                <img class="post-img" src="{{ asset('images/portfolio/'.$post->featured_image) }}" alt="..." />
                                 <div class="card-body">
                                     <div class="badge-primary m-b-8">
                                         {{ $post->categories?->name }}

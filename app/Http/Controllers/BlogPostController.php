@@ -76,10 +76,12 @@ class BlogPostController extends Controller
             'meta_keywords' => 'required',
         ]);
 
-        // Handle file upload
+
+
         if ($request->hasFile('cover')) {
-            $featured_image = time() . '.' . $request->cover->extension();
-            $request->cover->move(public_path('storage/images/portfolio/'), $featured_image);
+            $blogPost_featured_image = time() . '_featured_image_'.$request->title.".". $request->cover->getClientOriginalExtension();
+            $request->cover->move('images/portfolio', $blogPost_featured_image,'publics');
+            $blogPost->featured_image = $blogPost_featured_image;
         }
 
         // Create blog post
@@ -89,7 +91,7 @@ class BlogPostController extends Controller
             'content' => $request->content,
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
-            'featured_image' => $featured_image ?? null,
+            'featured_image' => $blogPost_featured_image ?? null,
             'category_id' => $request->category_id, // Set category_id
             'user_id' => auth('admin')->id(),
         ]);
@@ -164,20 +166,19 @@ class BlogPostController extends Controller
         } else {
             $blogPost->published_at = NULL;
         }
-
+        $directory = public_path('images/portfolio/');
         // Hapus gambar lama dan simpan gambar baru jika ada gambar baru yang di-upload
         if ($request->hasFile('featured_image')) {
             if ($blogPost->featured_image) {
-                // Hapus gambar lama dari storage
-                Storage::delete('public/images/portfolio/' . $blogPost->featured_image);
+                $oldCoverPath = $directory . $blogPost->featured_image;
+                if (file_exists($oldCoverPath)) {
+                    unlink($oldCoverPath); // Menghapus file lama
+                }
+                // Storage::delete('images/products/' . $blogPost->featured_image);
             }
-
-            // Simpan gambar baru
-            $featuredImage = time() . '_' . $request->featured_image->getClientOriginalName();
-            $request->featured_image->storeAs('public/images/portfolio', $featuredImage);
-
-            // Update nama file gambar di database
-            $blogPost->featured_image = $featuredImage;
+            $blogPost_featured_image = time() . '_featured_image_'.$blogPost->title.".". $request->featured_image->getClientOriginalExtension();
+            $request->featured_image->move('images/portfolio', $blogPost_featured_image,'publics');
+            $blogPost->featured_image = $blogPost_featured_image;
         }
 
         // Simpan perubahan

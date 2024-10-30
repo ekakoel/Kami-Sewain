@@ -75,6 +75,7 @@
                                                 </div>
                                                 <form id="updateStatusUser{{ $user->id }}" action="{{ route('admin.update.status.user', $user->id) }}" method="POST" class="update-form">
                                                     @csrf
+                                                    @method('PUT')
                                                     <label for="status" class="form-label">Status</label>
                                                     <select class="form-select" id="status" name="status" required>
                                                         <option value="Active" {{ $user->status == 'Active' ? 'selected' : '' }}>Active</option>
@@ -85,6 +86,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn button-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                                                <button type="submit" form="updateStatusUser{{ $user->id }}" class="btn button-secondary"><i class="fas fa-check"></i> Save</button>
                                             </div>
                                         </div>
                                     </div>

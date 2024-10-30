@@ -24,17 +24,11 @@ use App\Http\Controllers\OrderReceiptController;
 use App\Http\Controllers\ProductColorController;
 use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ProductMaterialController;
-
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
+Auth::routes();
 // ====================================================================================================
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', 'PageController@home')->name('home.index');
@@ -54,34 +48,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // SUBSCRIBE
     Route::get('/check-email', [SubscriberController::class, 'checkEmail']);
     Route::post('/subscribe', 'SubscriberController@signup')->name('subscribe');
-
-
-    // Route::get('/register', [AuthController::class, 'show_register'])->name('register.show');
-    // Route::post('/register-perform', [AuthController::class, 'register'])->name('register.perform');
-
-    // Route::get('/email/verify', function () {
-    //     return view('auth.verify-email');
-    // })->middleware(['auth'])->name('verification.notice');
-    
-    // Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
-    // ->middleware(['signed'])
-    // ->name('verification.verify');
-    
-    // Route::post('/email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])
-    // ->middleware(['auth'])
-    // ->name('verification.send');
-
-   
-    // Route::get('/login', [AuthController::class, 'show_login'])->name('login.show');
-    // Route::post('/login', [AuthController::class, 'login'])->name('login.perform');
     Route::get('/search', [ProductsController::class, 'filter_products'])->name('filter.perform');
     Route::post('/send-message-us', [EmailController::class, 'sendMessage'])->name('contact.send');
     Route::get('/products/filter', [ProductsController::class, 'filterProducts'])->name('products.filter');
-
-    // Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-    // Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-    // Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    // Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
     // USER
     Route::group(['middleware' => ['auth']], function () {
@@ -93,6 +62,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
     Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::delete('/profil/destroy/{email}', 'UserController@destroy')->name('user.destroy');
+        Route::put('/profile/update-image', [UserController::class, 'updateImage'])->name('profile.updateImage');
 
         // PROMOTION
         Route::post('/promotions/{promotion}/claim', [PromotionController::class, 'claimPromo'])->name('promotions.claim');
@@ -140,8 +110,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::group(['middleware' => ['adminauth']], function () {
             Route::get('/', [AdminController::class, 'index'])->name('admin.home');
-            
-            // Route::view('/', 'admin.index')->name('admin.home');
             Route::get('/disconnection', 'AdminAuthController@logout')->name('admin.logout.perform');
             Route::get('/admin/car', 'CarController@index')->name('admin.car.index');
             Route::get('/admin/car/{id}', 'CarController@show')->where('id', '[0-9]+')->name('admin.car.show');
@@ -150,14 +118,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/admin/car/edit/{id}', 'CarController@edit')->name('admin.car.edit');
             Route::put('/admin/car/edit/{id}', 'CarController@update')->name('admin.car.update');
             Route::delete('/admin/car/delete/{id}', 'CarController@destroy')->name('admin.car.destroy');
-            // Route::get('/locations', 'RentController@index')->name('admin.orders.index');
-            // Route::get('/locations/{id}', 'RentController@show')->where('id', '[0-9]+')->name('admin.rent.show');
-            // Route::get('/locations/edit/{id}', 'RentController@edit')->where('id', '[0-9]+')->name('admin.rent.edit');
-            // Route::put('/locations/edit/{id}', 'RentController@update')->where('id', '[0-9]+')->name('admin.rent.update');
-            // Route::delete('/locations/destroy/{id}', 'RentController@destroy')->where('id', '[0-9]+')->name('admin.rent.destroy');
-            // Route::get('/Users/{id}', 'UserController@show')->name('admin.user.show');
-            // Route::get('/Users/edit/{id}', 'UserController@edit')->name('admin.user.edit');
-            // Route::put('/Users/edit/{id}', 'UserController@update')->name('admin.user.update');
+
             
             // USERMAN
             Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
@@ -255,18 +216,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 });
-// ====================================================================================================
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-// Route::middleware('auth','admin')->group(function () {
-//     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-// });
 
 require __DIR__.'/auth.php';

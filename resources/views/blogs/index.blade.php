@@ -18,7 +18,7 @@
                     @foreach ($posts as $post)
                         <div class="col-lg-3">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img" src="{{ asset('storage/images/portfolio/'.$post->featured_image) }}" alt="..." />
+                                <img class="card-img" src="{{ asset('images/portfolio/'.$post->featured_image) }}" alt="..." />
                                 <div class="card-body">
                                     @if($post->categories->isNotEmpty())
                                         @foreach($post->categories as $category)

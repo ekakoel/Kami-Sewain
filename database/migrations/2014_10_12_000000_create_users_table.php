@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role', ['User', 'Guest'])->default('User');
             $table->enum('status', ['Active', 'Block','Pending'])->default('Pending');
+            $table->string('profile_img')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label for="cover">Cover Image</label>
                                     <div class="post-cover-img-preview">
-                                        <img id="coverPreview" src="{{ asset('/storage/images/portfolio/'.$portfolio->featured_image) }}" alt="{{ $portfolio->alt }}" width="100">
+                                        <img id="coverPreview" src="{{ asset('images/portfolio/'.$portfolio->featured_image) }}" alt="{{ $portfolio->alt }}" width="100">
                                     </div>
                                     <input id="cover" type="file" name="cover" class="form-control @error('cover') is-invalid @enderror" onchange="previewCoverImage(event)" value="{{ $portfolio->featured_image }}">
                                 </div>
@@ -192,21 +192,21 @@
                                 <a href="{{ route('admin.portfolio.detail',$portfolio->id) }}" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>
                             <div class="form-group">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" name="status" required>
+                                    <option {{ $portfolio->status == "draft"?"selected":""; }} value="draft">Draft</option>
+                                    <option {{ $portfolio->status == "published"?"selected":""; }} value="published">Published</option>
+                                    <option {{ $portfolio->status == "archived"?"selected":""; }} value="archived">Archived</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="featured_image">Cover Image</label>
                                 <div class="post-cover-img-preview">
-                                    <img id="coverPreview" src="{{ asset('storage/images/portfolio/'.$portfolio->featured_image) }}" alt="Image {{ $portfolio->title }}" width="100">
+                                    <img id="coverPreview" src="{{ asset('images/portfolio/'.$portfolio->featured_image) }}" alt="Image {{ $portfolio->title }}" width="100">
                                 </div>
                                 <input id="featured_image" type="file" name="featured_image" class="form-control @error('featured_image') is-invalid @enderror" onchange="previewCoverImage(event)" value="">
                             </div>
                             <div class="card-box-body">
-                                <div class="form-group">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select class="form-select" id="status" name="status" required>
-                                        <option {{ $portfolio->status == "draft"?"selected":""; }} value="draft">Draft</option>
-                                        <option {{ $portfolio->status == "published"?"selected":""; }} value="published">Published</option>
-                                        <option {{ $portfolio->status == "archived"?"selected":""; }} value="archived">Archived</option>
-                                    </select>
-                                </div>
                                 <div class="form-group">
                                     <label for="category_id" class="form-label">Category</label>
                                     <select class="form-select" id="category_id" name="category_id" required>

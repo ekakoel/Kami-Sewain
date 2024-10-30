@@ -226,12 +226,16 @@ class AdminController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $image) {
                 if ($image && $key < 5) {
+
+                    
+
                     $imageName = time() . '_' .$imageNames[$key]."_image_product_".$product->name.".". $image->getClientOriginalExtension();
                     $image->move('images/products', $imageName);
                     $secondary_image = $product->secondaryImages->where('name',$imageNames[$key])->first();
                     if ($secondary_image) {
                         if ($secondary_image->url) {
-                            Storage::delete('images/products/' . $secondary_image->url);
+                            $oldthumbnailPath = $directory . $secondary_image->url;
+                            unlink($oldthumbnailPath);
                         }
                         $secondary_image->update([
                             'name' => $imageNames[$key],

@@ -20,7 +20,7 @@
                     <div class="gallery m-b-35">
                         @foreach ($category->galleries as $index => $gallery)
                             <div id="categoryGallery-{{ $index }}" class="gallery-item fade-in" data-gallery-id="{{ $index }}">
-                                <img src="{{ asset('storage/images/galleries/'.$gallery->image) }}" alt="{{ $gallery->alt }}">
+                                <img src="{{ asset('images/galleries/'.$gallery->image) }}" alt="{{ $gallery->alt }}">
                             </div>
                         @endforeach
                     </div>
@@ -95,7 +95,7 @@
                         <div class="gallery m-b-35">
                             @foreach ($category->galleries as $index => $gallery)
                                 <div id="categoryGalery-{{ $index }}" class="gallery-item fade-in" data-gallery-id="{{ $index }}">
-                                    <img src="{{ asset('storage/images/galleries/'.$gallery->image) }}" alt="{{ $gallery->alt }}">
+                                    <img src="{{ asset('images/galleries/'.$gallery->image) }}" alt="{{ $gallery->alt }}">
                                 </div>
                                 <!-- Modal Layar Penuh -->
                                 <div class="card-modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">

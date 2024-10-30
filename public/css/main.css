@@ -4624,7 +4624,7 @@ body::-webkit-scrollbar-thumb {
 	Footer
 ==============================*/
 .footer {
-  background-color: #e5eaf2;
+  background: linear-gradient(283deg, #3f9fc6, #ffbdbd);
   position: relative;
   overflow: hidden;
 }

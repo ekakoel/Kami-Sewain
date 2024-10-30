@@ -65,14 +65,14 @@ class OrderAdminController extends Controller
     {
         $request->validate([
             'order_id' => 'required|exists:orders,id', // Ensure the order exists
-            'payment_date' => 'required|date',
+            'payment_date' => 'required',
             'amount' => 'required|numeric',
             'receipt_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image
         ]);
         $order = Orders::where('id',$request->order_id)->first();
         // Handle image upload
         $imagePath = $request->file('receipt_image')->store('receipts', 'public');
-
+        $payment_date = date('Y-m-d',strtotime($request->payment_date));
         if ($request->hasFile('receipt_image')) {
             $receipt = time() . '_receipt_'.$order->order_no.".". $request->receipt_image->getClientOriginalExtension();
             $request->receipt_image->storeAs('public/images/orders/', $receipt);
@@ -80,7 +80,7 @@ class OrderAdminController extends Controller
         // Create a new receipt entry
         OrderReceipt::create([
             'order_id' => $request->order_id,
-            'payment_date' => $request->payment_date,
+            'payment_date' => $payment_date,
             'amount' => $request->amount,
             'note' => $request->note,
             'receipt_image' => $receipt,
@@ -97,8 +97,8 @@ class OrderAdminController extends Controller
         if (!$receipt) {
             return response()->json(['error' => 'Receipt not found'], 404);
         }
-        if ($receipt->receipt_image && file_exists(public_path('storage/images/orders/' . $receipt->receipt_image))) {
-            unlink(public_path('storage/images/orders/' . $receipt->receipt_image));
+        if ($receipt->receipt_image && file_exists('images/orders/' . $receipt->receipt_image)) {
+            unlink('images/orders/' . $receipt->receipt_image);
         }
         $receipt->delete();
         return redirect()->route('admin.order.detail',$order_id)->with('success', 'Receipt deleted successfully');
