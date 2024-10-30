@@ -127,6 +127,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="product-thumbnails">
+                                                    <img src="{{ asset('images/products/' . $product->cover) }}" alt="{{ $product->alt }}" class="product-thumbnail" onclick="changeImage({{ $product->id }}, '{{ asset('images/products/' . $product->cover) }}',this)">
                                                     @foreach ($product->secondaryImages as $thumbnail)
                                                         <img src="{{ asset('images/products/'.$thumbnail->url) }}" alt="{{ $thumbnail->alt }}" class="product-thumbnail" onclick="changeImage({{ $product->id }}, '{{ asset('images/products/'.$thumbnail->url) }}',this)">
                                                     @endforeach
