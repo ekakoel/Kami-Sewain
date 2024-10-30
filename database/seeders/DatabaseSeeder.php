@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductColorSeeder::class);
         $this->call(ProductMaterialSeeder::class);
         $this->call(BankAccountSeeder::class);
-        // Products::factory(50)->create();
-        // BlogPost::factory(6)->create();
+        Products::factory(50)->create();
+        BlogPost::factory(6)->create();
     }
 }

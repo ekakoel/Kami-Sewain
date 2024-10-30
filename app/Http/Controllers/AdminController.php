@@ -106,26 +106,36 @@ class AdminController extends Controller
 
         // Handle image upload
         if ($request->hasFile('cover')) {
-            $directory = public_path('images/products/');
-            if (!file_exists($directory)) {
-                mkdir($directory, 0755, true);
-            }
-            $coverName = time() . '.' . $request->cover->extension();
-            if ($request->cover->move($directory, $coverName)) {
+            $coverName = time() . '_cover_product_'.$request->name.".". $request->cover->getClientOriginalExtension();
+            $path = $request->cover->move('images/products', $coverName, 'public');
+            if ($path) {
                 $product->cover = $coverName;
             } else {
                 return back()->with('error', 'Failed to upload cover image.');
             }
         }
-
         $product->save();
+        // if ($request->hasFile('cover')) {
+        //     $directory = public_path('images/products/');
+        //     if (!file_exists($directory)) {
+        //         mkdir($directory, 0755, true);
+        //     }
+        //     $coverName = time() . '.' . $request->cover->extension();
+        //     if ($request->cover->move($directory, $coverName)) {
+        //         $product->cover = $coverName;
+        //     } else {
+        //         return back()->with('error', 'Failed to upload cover image.');
+        //     }
+        // }
+
+        // $product->save();
 
         $imageNames = ['Front', 'Right', 'Left', 'Back', 'Top'];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $image) {
                 if ($image && $key < 5) {
-                    $imageName = time() . '_' . $image->getClientOriginalName();
-                    $image->move(public_path('images/products/'), $imageName);
+                    $imageName = time() . '_' .$imageNames[$key]."_image_product_".$product->name.".". $image->getClientOriginalExtension();
+                    $image->move('images/products', $imageName,'public');
                     $product->secondaryImages()->create([
                         'name' => $imageNames[$key],
                         'url' => $imageName,
@@ -168,7 +178,7 @@ class AdminController extends Controller
     public function update_product(Request $request, $id)
     {
         $product = Products::findOrFail($id);
-
+        $directory = public_path('images/products/');
         // // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
@@ -187,10 +197,14 @@ class AdminController extends Controller
         ]);
          if ($request->hasFile('cover')) {
             if ($product->cover) {
-                Storage::delete('images/products/' . $product->cover);
+                $oldCoverPath = $directory . $product->cover;
+                if (file_exists($oldCoverPath)) {
+                    unlink($oldCoverPath); // Menghapus file lama
+                }
+                // Storage::delete('images/products/' . $product->cover);
             }
             $product_cover = time() . '_cover_product_'.$request->name.".". $request->cover->getClientOriginalExtension();
-            $request->cover->move('images/products', $product_cover);
+            $request->cover->move('images/products', $product_cover,'publics');
             $product->cover = $product_cover;
         }
         // Update produk
@@ -213,7 +227,7 @@ class AdminController extends Controller
             foreach ($request->file('images') as $key => $image) {
                 if ($image && $key < 5) {
                     $imageName = time() . '_' .$imageNames[$key]."_image_product_".$product->name.".". $image->getClientOriginalExtension();
-                    $image->move(public_path('images/products/'), $imageName);
+                    $image->move('images/products', $imageName);
                     $secondary_image = $product->secondaryImages->where('name',$imageNames[$key])->first();
                     if ($secondary_image) {
                         if ($secondary_image->url) {

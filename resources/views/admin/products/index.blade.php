@@ -45,7 +45,7 @@
                                 <td>{{ $product->category?->name }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
-                                    <i class="fa fa-star icon-dark" aria-hidden="true"></i> {{ number_format($product->averageRating, 2) }}, 
+                                    <i class="fa fa-star icon-dark" aria-hidden="true"></i> {{ number_format($product->averageRating, 1) }}, 
                                     <i class="fa fa-heart icon-dark" aria-hidden="true"></i> {{ $product->likes()->count() }}
                                 </td>
                                 <td class="{{ $product->status == "Active"?"color-secondary":"color-dark" }}">{{ $product->status }}</td>

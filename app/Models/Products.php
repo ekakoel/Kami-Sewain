@@ -114,5 +114,8 @@ class Products extends Model
                     ->withPivot('quantity', 'price','total_price')
                     ->withTimestamps();
     }
-
+    public function getAverageRatingAttribute()
+    {
+        return $this->ratings()->avg('rating');
+    }
 }

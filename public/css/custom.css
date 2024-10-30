@@ -1812,7 +1812,8 @@ label{
   }
   .like-button i {
     font-size: 17px;
-    color: grey;
+    color: #ffffff;
+    text-shadow: 0px 0 2px #353535;
   }
 
   .like-button i.liked {
@@ -1829,7 +1830,7 @@ label{
   /* RATING */
   .like-icon{
     position: absolute;
-    bottom: 3px;
+    bottom: 40px;
     right: -5px;
   }
   .heart-btn i {

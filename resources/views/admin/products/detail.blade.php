@@ -42,7 +42,7 @@
                                 <div class="description-item-container">
                                     <div class="card-title m-b-18"><h3>{{ $product->name }}</h3></div>
                                     <div class="rating-container">
-                                        <p><strong><i class="fa fa-star" aria-hidden="true"></i></strong> {{ number_format($product->averageRating, 1) }}/5</p>
+                                        <p><strong><i class="fa fa-star" aria-hidden="true"></i></strong> {{ number_format($product->averageRating, 1) }}</p>
                                         <p><strong><i class="fa fa-heart" aria-hidden="true"></i></strong> {{ $product->likes()->count() }}</p>
                                     </div>
                                     <p><strong>Category:</strong> {{ $product->category->name ?? 'N/A' }}</p>

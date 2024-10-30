@@ -107,7 +107,7 @@
                                     <i class="fa fa-heart" aria-hidden="true"></i> {{ $popular_product->likes()->count() }}
                                 </span>
                                 <span class="like-count" id="rating-count-{{ $popular_product->id }}" {{ $popular_product->averageRating == 0 ? 'style=display:none;' : '' }}>
-                                    <i class="far fa-star" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 2) }}
+                                    <i class="far fa-star" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 1) }}
                                 </span>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                                             <i class="fa fa-heart-o" aria-hidden="true"></i> {{ $popular_product->likes()->count() }}
                                         </span>
                                         <span class="like-count" id="like-count-{{ $popular_product->id }}" {{ $popular_product->averageRating == 0 ? 'style=display:none;' : '' }}>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 2) }}
+                                            <i class="fa fa-star-o" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 1) }}
                                         </span>
                                     </div>
                                     <div class="product-thumbnails">

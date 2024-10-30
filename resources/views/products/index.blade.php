@@ -96,7 +96,7 @@
                                                     <i class="far fa-heart"></i> {{ $product->likes()->count() }}
                                                 </span>
                                                 <span class="like-count" id="rating-count-{{ $product->id }}" {{ $product->averageRating == 0 ? 'style=display:none;' : '' }}>
-                                                    <i class="far fa-star"></i> {{ number_format($product->averageRating, 2) }}
+                                                    <i class="far fa-star"></i> {{ number_format($product->averageRating, 1) }}
                                                 </span>
                                             </div>
                                         </div>
@@ -120,10 +120,10 @@
                                                 </div>
                                                 <div class="rating-like-modal">
                                                     <span class="like-count" id="like-count-{{ $product->id }}" {{ $product->likes()->count() == 0 ? 'style=display:none;' : '' }}>
-                                                        <i class="fa fa-heart-o" aria-hidden="true"></i> {{ $product->likes()->count() }}
+                                                        <i class="far fa-heart"></i> {{ $product->likes()->count() }}
                                                     </span>
                                                     <span class="like-count" id="like-count-{{ $product->id }}" {{ $product->averageRating == 0 ? 'style=display:none;' : '' }}>
-                                                        <i class="fa fa-star-o" aria-hidden="true"></i> {{ number_format($product->averageRating, 5) }}
+                                                        <i class="far fa-star"></i> {{ number_format($product->averageRating, 1) }}
                                                     </span>
                                                 </div>
                                                 <div class="product-thumbnails">
