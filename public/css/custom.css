@@ -106,6 +106,25 @@ aside{
 .logo-document img{
   width: 18%;
 }
+.nav a{
+  color: #a1a1a1 !important;
+}
+.sb-sidenav{
+  color: #00ceff !important;
+}
+.sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
+  color: #00ceff78 !important;
+  font-size: 1rem !important;
+}
+.sb-nav-link-icon i{
+  color: #a1a1a1 !important;
+}
+.nav a:is(:hover,:active){
+  color: #00ceff !important;
+}
+.sb-nav-link-icon i:is(:hover,:active){
+  color: #00ceff !important;
+}
 .sb-sidenav .sb-sidenav-menu .nav .nav-link span {
     border-radius: 80px !important;
     position: absolute;
@@ -520,7 +539,6 @@ header{
     position: relative;
     width: 100%;
     overflow: hidden;
-    height: 60vh;
     object-fit: cover;
 }
 .carousel-inner-text{
@@ -2512,6 +2530,10 @@ label{
   top: 0;
   place-content: center;
   text-align-last: center;
+}
+.footer-content{
+  background-color: #ffffff !important;
+    box-shadow: 0px 0px 9px #0000005e;
 }
 .footer-copyright{
   padding: 18px 0 !important;

@@ -6,7 +6,7 @@
         <!-- Header-->
         <section id="slider">
             <div class="main-slider-container">
-                <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img class="d-block" src="{{ asset('images/slider/slider_01.jpeg') }}" alt="kami sewain table" />
