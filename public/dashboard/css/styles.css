@@ -11456,8 +11456,8 @@ body {
 .sb-sidenav .sb-sidenav-menu .nav .nav-link {
   display: flex;
   align-items: center;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 4px;
+  padding-bottom: 4px;
   position: relative;
   margin-left: 18px;
 }
@@ -11501,10 +11501,13 @@ body {
   color: #fff;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
-  color: #fff;
+  
+  color: #3b3b3b !important;
+  background-color: #ecf0f4;
+  border-radius: 45px 0 0 45px;
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
-  color: #fff;
+.sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon i {
+  color: #00ceff !important;
 }
 .sb-sidenav-dark .sb-sidenav-footer {
   background-color: #343a40;

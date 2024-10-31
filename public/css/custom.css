@@ -113,17 +113,17 @@ aside{
   color: #00ceff !important;
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: #00ceff78 !important;
+  color: #c3c3c3 !important;
   font-size: 1rem !important;
 }
 .sb-nav-link-icon i{
   color: #a1a1a1 !important;
 }
 .nav a:is(:hover,:active){
-  color: #00ceff !important;
+  color: #ffffff !important;
 }
 .sb-nav-link-icon i:is(:hover,:active){
-  color: #00ceff !important;
+  color: #ffffff !important;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link span {
     border-radius: 80px !important;

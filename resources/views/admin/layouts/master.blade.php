@@ -51,16 +51,16 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Dashboard</div>
-                        <a class="nav-link" href="{{ route('admin.home') }}">
+                        <a class="nav-link {{ Route::is('admin.home') ? 'active' : '' }}" href="{{ route('admin.home') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Statistics
                         </a>
                         <div class="sb-sidenav-menu-heading">Posts</div>
-                        <a class="nav-link" href="{{ route('admin.portfolio') }}">
+                        <a class="nav-link {{ Route::is('admin.portfolio') ? 'active' : '' }}" href="{{ route('admin.portfolio') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
                             Portfolio
                         </a>
-                        <a class="nav-link" href="{{ route('admin.comments') }}">
+                        <a class="nav-link {{ Route::is('admin.comments') ? 'active' : '' }}" href="{{ route('admin.comments') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-commenting-o" aria-hidden="true"></i></div>
                             Comment
                             @php
@@ -71,33 +71,33 @@
                             @endif
                         </a>
                         <div class="sb-sidenav-menu-heading">Services</div>
-                        <a class="nav-link" href="{{ route('admin.products') }}">
+                        <a class="nav-link {{ Route::is('admin.products') ? 'active' : '' }}" href="{{ route('admin.products') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
                             Product
                         </a>
-                        <a class="nav-link" href="{{ route('admin.categories.index') }}">
+                        <a class="nav-link {{ Route::is('admin.categories.index') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-th-large" aria-hidden="true"></i></div>
                             Category
                         </a>
-                        <a class="nav-link" href="{{ route('admin.models.index') }}">
+                        <a class="nav-link {{ Route::is('admin.models.index') ? 'active' : '' }}" href="{{ route('admin.models.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-th-large" aria-hidden="true"></i></div>
                             Model
                         </a>
-                        <a class="nav-link" href="{{ route('admin.materials.index') }}">
+                        <a class="nav-link {{ Route::is('admin.materials.index') ? 'active' : '' }}" href="{{ route('admin.materials.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-th-large" aria-hidden="true"></i></div>
                             Material
                         </a>
-                        <a class="nav-link" href="{{ route('admin.colors.index') }}">
+                        <a class="nav-link {{ Route::is('admin.colors.index') ? 'active' : '' }}" href="{{ route('admin.colors.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-th-large" aria-hidden="true"></i></div>
                             Color
                         </a>
                         <div class="sb-sidenav-menu-heading">Promotions</div>
-                        <a class="nav-link" href="{{ route('admin.promotions') }}">
+                        <a class="nav-link {{ Route::is('admin.promotions') ? 'active' : '' }}" href="{{ route('admin.promotions') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
                             Promo
                         </a>
                         <div class="sb-sidenav-menu-heading">Orders</div>
-                        <a class="nav-link" href="{{ route('admin.orders.index') }}">
+                        <a class="nav-link {{ Route::is('admin.orders.index') ? 'active' : '' }}" href="{{ route('admin.orders.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                             Orders
                             @php
@@ -108,12 +108,12 @@
                             @endif
                         </a>
                         <div class="sb-sidenav-menu-heading">Contact</div>
-                        <a class="nav-link" href="{{ route('admin.contacts') }}">
+                        <a class="nav-link {{ Route::is('admin.contacts') ? 'active' : '' }}" href="{{ route('admin.contacts') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                             Messages
                         </a>
                         <div class="sb-sidenav-menu-heading">Users</div>
-                        <a class="nav-link" href="{{ route('admin.users.index') }}">
+                        <a class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                             User Manager
                         </a>

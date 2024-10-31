@@ -80,3 +80,16 @@ $(document).ready(function(){
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Ambil URL halaman saat ini
+    const currentPage = window.location.pathname;
+    // Dapatkan semua link di menu
+    const menuItems = document.querySelectorAll("nav ul li a");
+    
+    menuItems.forEach(item => {
+        // Tambahkan kelas 'active' jika URL sesuai
+        if (item.getAttribute("href") === currentPage) {
+            item.classList.add("active");
+        }
+    });
+});
