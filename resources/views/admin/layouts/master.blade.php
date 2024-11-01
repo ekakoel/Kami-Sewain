@@ -71,7 +71,7 @@
                             @endif
                         </a>
                         <div class="sb-sidenav-menu-heading">Services</div>
-                        <a class="nav-link {{ Route::is('admin.products') ? 'active' : '' }}" href="{{ route('admin.products') }}">
+                        <a class="nav-link {{ Route::is('admin.products') || Request::routeIs('admin.products.detail') || Request::routeIs('admin.products.edit') || Request::routeIs('admin.products.create') ? 'active' : '' }}" href="{{ route('admin.products') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
                             Product
                         </a>

@@ -48,7 +48,7 @@
                             <div class="product-modal-body">
                                 <div class="product-image-section">
                                     <div class="product-large-image">
-                                        <img id="mainImage{{ $category->id }}" src="{{ asset('/images/categories/image/'.$category->icon) }}" alt="{{ $category->name }}">
+                                        <img src="{{ asset('/images/categories/image/'.$category->cover) }}" alt="{{ $category->name }}">
                                     </div>
                                 </div>
                                 <div class="product-details-section">
@@ -135,15 +135,16 @@
                                     </div>
                                     <div class="rating-like-modal">
                                         <span class="like-count" id="like-count-{{ $popular_product->id }}" {{ $popular_product->likes()->count() == 0 ? 'style=display:none;' : '' }}>
-                                            <i class="far fa-heart" aria-hidden="true"></i> {{ $popular_product->likes()->count() }}
+                                            <i class="far fa-heart"></i> {{ $popular_product->likes()->count() }}
                                         </span>
                                         <span class="like-count" id="like-count-{{ $popular_product->id }}" {{ $popular_product->averageRating == 0 ? 'style=display:none;' : '' }}>
-                                            <i class="far fa-star" aria-hidden="true"></i> {{ number_format($popular_product->averageRating, 1) }}
+                                            <i class="far fa-star"></i> {{ number_format($popular_product->averageRating, 1) }}
                                         </span>
                                     </div>
                                     <div class="product-thumbnails">
+                                        <img src="{{ asset('images/products/' . $popular_product->cover) }}" alt="{{ $popular_product->alt }}" class="product-thumbnail" onclick="changeImage({{ $popular_product->id }}, '{{ asset('images/products/' . $popular_product->cover) }}',this)">
                                         @foreach ($popular_product->secondaryImages as $thumbnail)
-                                            <img src="{{ asset('/images/product/'.$thumbnail->url) }}" alt="{{ $thumbnail->alt }}" class="product-thumbnail" onclick="changeImage({{ $popular_product->id }}, '{{ asset('/images/product/'.$thumbnail->url) }}',this)">
+                                            <img src="{{ asset('images/products/'.$thumbnail->url) }}" alt="{{ $thumbnail->alt }}" class="product-thumbnail" onclick="changeImage({{ $popular_product->id }}, '{{ asset('images/products/'.$thumbnail->url) }}',this)">
                                         @endforeach
                                     </div>
                                 </div>
@@ -327,10 +328,33 @@
             thumbnailElement.classList.add('active');
         }
         window.onload = function() {
-            @foreach ($products as $product)
+            @foreach ($popularProducts as $product)
                 document.querySelector('#productModal{{ $product->id }} .product-thumbnail').classList.add('active');
             @endforeach
         };
+
+        // // Change Large Image when Thumbnail Clicked
+        // function changeImage(productId, imageSrc, thumbnailElement) {
+        //     // Change the main large image
+        //     document.getElementById('mainImage' + productId).src = imageSrc;
+
+        //     // Remove the 'active' class from all thumbnails for this specific product
+        //     const thumbnails = document.querySelectorAll('#productModal' + productId + ' .product-thumbnail');
+        //     thumbnails.forEach((thumbnail) => {
+        //         thumbnail.classList.remove('active');
+        //     });
+
+        //     // Add 'active' class to the clicked thumbnail
+        //     thumbnailElement.classList.add('active');
+        // }
+
+        // // Set default first image as active on page load for each product modal
+        // window.onload = function() {
+        //     @foreach ($popularProducts as $product)
+        //         document.querySelector('#productModal{{ $product->id }} .product-thumbnail').classList.add('active');
+        //     @endforeach
+        // };
+
         window.onclick = function(event) {
             @foreach ($products as $product)
                 if (event.target == document.getElementById('productModal{{ $product->id }}')) {
@@ -338,6 +362,10 @@
                 }
             @endforeach
         };
+
+
+
+        
 
         
 

@@ -81,10 +81,13 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="icon{{ $no }}">Icon Image</label>
-                                                    <!-- Tampilkan ikon sebelumnya -->
                                                     <img id="EditIconPreview{{ $no }}" src="{{ asset('images/categories/'.$category->icon) }}" alt="Icon Preview" style="margin-top: 10px; width: 100px; height: auto; margin-bottom:18px;">
-                                                    <!-- Input file untuk memperbarui ikon -->
                                                     <input type="file" class="form-control" id="icon{{ $no }}" name="icon" accept="image/*" data-preview="EditIconPreview{{ $no }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="editBgImage{{ $no }}">Cover Image</label>
+                                                    <img id="EditBgPreview{{ $no }}" src="{{ asset('images/categories/image/'.$category->cover) }}" alt="Image Preview" style="margin-top: 10px; width: 100px; height: auto; margin-bottom:18px;">
+                                                    <input type="file" class="form-control" id="editBgImage{{ $no }}" name="background_image" accept="image/*" data-edit="EditBgPreview{{ $no }}">
                                                 </div>
                                             </form>
                                         </div>
@@ -126,6 +129,11 @@
                                         <img id="iconPreview" src="#" alt="Icon Preview" style="display: none; margin-top: 10px; width: 100px; height: auto; margin-bottom:18px;">
                                         <input type="file" class="form-control" id="icon" name="icon" accept="image/*" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="bg_modal">Cover Image</label>
+                                        <img id="bgModal" src="#" alt="background Preview" style="display: none; margin-top: 10px; width: 100px; height: auto; margin-bottom:18px;">
+                                        <input type="file" class="form-control" id="bg_modal" name="bg_modal" accept="image/*" required>
+                                    </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -157,6 +165,21 @@
                 }
             });
         });
+        $(document).ready(function() {
+            // Preview icon image
+            $('#bg_modal').on('change', function() {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#bgModal').attr('src', e.target.result).show();
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#bgModal').hide();
+                }
+            });
+        });
 
         $(document).ready(function() {
             // Preview icon image dynamically for each input in a foreach loop
@@ -174,39 +197,25 @@
                 }
             });
         });
-        </script>
-        
-        {{-- <script>
+
         $(document).ready(function() {
-            $('.delete-form').on('submit', function(e) {
-                e.preventDefault(); // Mencegah form dari pengiriman default
-        
-                var form = $(this);
-                var url = form.attr('action');
-        
-                // Konfirmasi penghapusan
-                if (confirm('Are you sure you want to delete this category?')) {
-                    $.ajax({
-                        url: url,
-                        type: 'DELETE',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            alert(response.success); // Menampilkan pesan sukses
-        
-                            // Menghapus baris kategori dari tabel
-                            form.closest('tr').remove(); 
-                        },
-                        error: function(xhr) {
-                            console.error(xhr);
-                            alert('An error occurred while deleting the category');
-                        }
-                    });
+            $('input[type="file"][id^="editBgImage"]').on('change', function() {
+                var input = $(this); // File input element
+                var file = this.files[0];
+                var previewEditId = input.data('edit'); // Get the preview element's ID from data attribute
+
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#' + previewEditId).attr('src', e.target.result).show(); // Update the correct preview image
+                    }
+                    reader.readAsDataURL(file);
                 }
             });
         });
-        </script> --}}
+        </script>
+        
+        
         
 </main>
     

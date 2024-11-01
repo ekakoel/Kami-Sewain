@@ -14,6 +14,7 @@ class Categories extends Model
         'name',
         'description',
         'icon',
+        'cover',
     ];
 
     public function products()
