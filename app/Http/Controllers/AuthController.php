@@ -73,6 +73,9 @@ class AuthController extends Controller
 
         // Cek apakah kredensial valid dan login
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $user->session_id = session()->getId();
+            $user->save();
             // Redirect ke halaman dashboard jika berhasil login
             return redirect()->route('home.index')->with('success', 'Login successful!');
         }
@@ -107,6 +110,10 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
+        $user = Auth::user();
+        $user->session_id = null;
+        $user->save();
+
         Auth::logout();
         $request->session()->flush();
         return redirect('/login');
