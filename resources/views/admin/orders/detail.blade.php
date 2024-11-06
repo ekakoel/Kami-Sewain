@@ -243,7 +243,7 @@
                                                         </div>
                                                         <div class="modal-body-section">
                                                             <div class="modal-image-section">
-                                                                <img class="receipt-img" src="{{ asset('images/orders/'.$receipt->receipt_image) }}" alt="Order Receipt">
+                                                                <img class="receipt-img" src="{{ asset('storage/receipts/'.$receipt->receipt_image) }}" alt="Order Receipt">
                                                             </div>
                                                             <div class="modal-detail-section">
                                                                 <div class="row">

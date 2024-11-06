@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->integer('order_id');
+            $table->string('courier_send')->nullable();
+            $table->string('courier_send_phone')->nullable();
+            $table->string('courier_take')->nullable();
+            $table->string('courier_take_phone')->nullable();
             $table->string('recipient');
             $table->string('telephone');
             $table->text('address');
@@ -22,6 +26,9 @@ return new class extends Migration
             $table->string('country');
             $table->date('delivery_date');
             $table->date('return_date');
+            $table->string('product_location');
+            $table->longText('note_send')->nullable();
+            $table->longText('note_take')->nullable();
             $table->string('status');
             $table->timestamps();
         });

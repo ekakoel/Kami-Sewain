@@ -155,6 +155,7 @@ class OrdersController extends Controller
                 'total_price' => $cart_total_price,
             ]);
         }
+        $product_location = "Warehouse";
         $shipping = new Shippings([
             'order_id' => $order->id,
             'recipient' => $request->recipient,
@@ -165,6 +166,7 @@ class OrdersController extends Controller
             'country' => $validated['country'],
             'delivery_date' => $rental_start_date,
             'return_date' => $rental_end_date,
+            'product_location' => $product_location,
             'status' => $shipping_status,
         ]);
         $shipping->save();

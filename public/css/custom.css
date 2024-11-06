@@ -1731,6 +1731,12 @@ label{
 .bg-light{
   background-color: rgb(237 241 247) !important;
 }
+.bg-red{
+  background: #ff000069 !important;
+}
+.bg-green{
+  background-color: #a2ffa2 !important;
+}
 
 .promo-container{
   display: flex;
@@ -2313,7 +2319,9 @@ label{
     margin: 1em 0;
     padding: 0;
   }
-
+.hr-clear{
+  border: none !important;
+}
     .header-nav-auth-item{
       display: none;
     }

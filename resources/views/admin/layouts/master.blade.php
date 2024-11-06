@@ -49,12 +49,13 @@
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
-                    <div class="nav">
+                    <div class="nav m-b-27">
                         <div class="sb-sidenav-menu-heading">Dashboard</div>
                         <a class="nav-link {{ Route::is('admin.home') ? 'active' : '' }}" href="{{ route('admin.home') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Statistics
                         </a>
+                        
                         <div class="sb-sidenav-menu-heading">Posts</div>
                         <a class="nav-link {{ Route::is('admin.portfolio') ? 'active' : '' }}" href="{{ route('admin.portfolio') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
@@ -70,6 +71,7 @@
                                 <span class="badge bg-danger float-end">{{ $commentCount }}</span> <!-- Tampilkan badge jika ada komentar -->
                             @endif
                         </a>
+                        
                         <div class="sb-sidenav-menu-heading">Services</div>
                         <a class="nav-link {{ Route::is('admin.products') || Request::routeIs('admin.products.detail') || Request::routeIs('admin.products.edit') || Request::routeIs('admin.products.create') ? 'active' : '' }}" href="{{ route('admin.products') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
@@ -107,16 +109,22 @@
                                 <span class="badge bg-danger">{{ $commentCount }}</span> <!-- Tampilkan badge jika ada komentar -->
                             @endif
                         </a>
+                        <a class="nav-link {{ Route::is('admin.shippings') ? 'active' : '' }}" href="{{ route('admin.shippings') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-truck"></i></div>
+                            Shipping
+                        </a>
                         <div class="sb-sidenav-menu-heading">Contact</div>
                         <a class="nav-link {{ Route::is('admin.contacts') ? 'active' : '' }}" href="{{ route('admin.contacts') }}">
                             <div class="sb-nav-link-icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                             Messages
                         </a>
+                        @isDeveloper
                         <div class="sb-sidenav-menu-heading">Users</div>
                         <a class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                             User Manager
                         </a>
+                        @endIsDeveloper
                     </div>
                 </div>
                 <div class="sb-sidenav-footer text-light">

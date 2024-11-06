@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Image;
+use App\Models\Orders;
 use App\Models\Ratings;
 use App\Models\Products;
+use App\Models\Promotion;
 use App\Models\Categories;
 use App\Models\ProductColor;
 use App\Models\ProductModel;
@@ -24,7 +27,12 @@ class AdminController extends Controller
         $draftProducts = Products::where('status','Draft')->get();
         $allProducts = $data_products->getProducts();
         $productCategories = Categories::all();
-
+        $models = ProductModel::all();
+        $users = User::all();
+        $materials = ProductMaterial::all();
+        $colors = ProductColor::all();
+        $promotions = Promotion::all();
+        $orders = Orders::all();
         if (is_null($allProducts)) {
             $noProductsMessage = 'Tidak ada produk yang tersedia.';
         } else {
@@ -36,7 +44,7 @@ class AdminController extends Controller
         } else {
             $noCategoriesMessage = '';
         }
-        return view('admin.index', compact('products','activeProducts','draftProducts','allProducts', 'noProductsMessage', 'productCategories', 'noCategoriesMessage'));
+        return view('admin.index', compact('orders','promotions','colors','materials','models','users','products','activeProducts','draftProducts','allProducts', 'noProductsMessage', 'productCategories', 'noCategoriesMessage'));
     }
     public function products()
     {

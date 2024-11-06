@@ -15,6 +15,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\ShippingsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\SubscriberController;
@@ -121,9 +122,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
             
             // USERMAN
-            Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
-            Route::put('/users/update/{id}', [UserController::class, 'update_status_user'])->name('admin.update.status.user');
-            Route::put('/users/block/{id}', [UserController::class, 'block_user'])->name('admin.user.block');
+            Route::get('/users', [UserController::class, 'index'])->middleware('adminPos:Developer')->name('admin.users.index');
+            Route::put('/users/update/{id}', [UserController::class, 'update_status_user'])->middleware('adminPos:Developer')->name('admin.update.status.user');
+            Route::put('/users/block/{id}', [UserController::class, 'block_user'])->middleware('adminPos:Developer')->name('admin.user.block');
 
             // CONTACTS
             Route::get('/contacts', [EmailController::class, 'index'])->name('admin.contacts');
@@ -209,6 +210,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::post('/order/payment/{id}', [OrderAdminController::class, 'set_order_to_payment'])->name('admin.order.set.payment');
             Route::post('/order/validate/receipt/{id}', [OrderAdminController::class, 'validate_receipt'])->name('admin.order.validate.receipt');
             Route::delete('/orders/{id}', [OrderAdminController::class, 'destroy'])->name('admin.order.destroy');
+            
+            //SHIPPINGS
+            Route::get('/shippings', [ShippingsController::class, 'index'])->name('admin.shippings');
+            Route::post('/shipping/{id}', [ShippingsController::class, 'send_product'])->name('admin.shipping.send');
+            Route::post('/shipping/update/{id}', [ShippingsController::class, 'update_shipping_product'])->name('admin.shipping.update');
+            Route::post('/shipping/take/{id}', [ShippingsController::class, 'take_shipping_product'])->name('admin.shipping.take');
 
             // RECEIPT
             Route::post('/receipts/upload', [OrderAdminController::class, 'store_receipt'])->name('admin.receipts.upload');

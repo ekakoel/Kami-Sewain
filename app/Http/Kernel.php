@@ -73,5 +73,10 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'redirectIfActive' => \App\Http\Middleware\RedirectIfActive::class,
         'ensureActive' => \App\Http\Middleware\EnsureUserIsActive::class,
+        'adminDeveloper' => \App\Http\Middleware\AdminDeveloper::class,
+        'adminAuthor' => \App\Http\Middleware\AdminAuthor::class,
+        'adminReservation' => \App\Http\Middleware\AdminReservation::class,
+        'adminManager' => \App\Http\Middleware\AdminManager::class,
+        'adminPos' => \App\Http\Middleware\AdminPos::class,
     ];
 }

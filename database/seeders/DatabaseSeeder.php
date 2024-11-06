@@ -11,6 +11,7 @@ use App\Models\Categories;
 use Illuminate\Database\Seeder;
 use Database\Seeders\BankAccountSeeder;
 use Database\Seeders\ProductColorSeeder;
+use Database\Seeders\ShippingTransportSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -48,5 +49,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BankAccountSeeder::class);
         Products::factory(50)->create();
         BlogPost::factory(6)->create();
+        $this->call(ShippingTransportSeeder::class);
     }
 }

@@ -1284,6 +1284,7 @@ table.dataTable>tbody>tr.child ul.dtr-details .dtr-title {
     font-size: 14px;
     font-weight: 500;
     padding: 4px 8px;
+    vertical-align: text-top !important;
 }
 .table td .icon-dark{
     font-size: 1rem;
@@ -1298,7 +1299,7 @@ table.dataTable.display tbody tr.odd,
 table.dataTable.display tbody tr:hover,
 table.dataTable.hover tbody tr:hover,
 table.dataTable.stripe tbody tr.odd {
-    background: #ecf0f3 !important
+    background: #ecf0f3
 }
 
 table.dataTable tbody tr.selected,

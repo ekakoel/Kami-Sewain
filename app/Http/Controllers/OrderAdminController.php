@@ -75,7 +75,7 @@ class OrderAdminController extends Controller
         $payment_date = date('Y-m-d',strtotime($request->payment_date));
         if ($request->hasFile('receipt_image')) {
             $receipt = time() . '_receipt_'.$order->order_no.".". $request->receipt_image->getClientOriginalExtension();
-            $request->receipt_image->storeAs('public/images/orders/', $receipt);
+            $request->receipt_image->storeAs('public/receipts/', $receipt);
         }
         // Create a new receipt entry
         OrderReceipt::create([
@@ -97,18 +97,11 @@ class OrderAdminController extends Controller
         if (!$receipt) {
             return response()->json(['error' => 'Receipt not found'], 404);
         }
-        if ($receipt->receipt_image && file_exists('images/orders/' . $receipt->receipt_image)) {
-            unlink('images/orders/' . $receipt->receipt_image);
+        if ($receipt->receipt_image && file_exists('storage/receipts/' . $receipt->receipt_image)) {
+            unlink('storage/receipts/' . $receipt->receipt_image);
         }
         $receipt->delete();
         return redirect()->route('admin.order.detail',$order_id)->with('success', 'Receipt deleted successfully');
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -147,7 +140,7 @@ class OrderAdminController extends Controller
         $rentalEndDate = Carbon::parse($validated['rental_end_date']);
         $rentalDuration = $rentalStartDate->diffInDays($rentalEndDate);
         $order_status = "Payment";
-        $shipping_status = "Prepared";
+        $shipping_status = "Payment";
         $total = array_sum(array_map(fn($details) => $details['quantity'] * $details['price'], $cart));
         $total_price = $total * $rentalDuration;
         $payment_duedate = $rentalStartDate->subDays(7);
@@ -225,29 +218,39 @@ class OrderAdminController extends Controller
     }
     public function validate_receipt(Request $request, $id)
     {
-        $status = $request->status;
         $receipt = OrderReceipt::findOrFail($id);
+        $status = $request->status;
         $order_id = $receipt->order_id;
         $order = Orders::where('id',$order_id)->first();
         if ($status == "Valid") {
             $balance = $order->balance - $receipt->amount;
             if ($balance > 0) {
                 $order_status = 'Payment';
+                $payment_status = 'Payment';
             }else{
                 $order_status = 'Paid';
+                $payment_status = 'Paid';
             }
         }else{
             $balance = $order->balance;
             $order_status = 'Payment';
+            $payment_status = 'Payment';
         }
         $order->update([
             'balance' => $balance,
             'status' => $order_status,
+            'payment_status' => $payment_status,
         ]);
         $receipt->update([
             'status' => $status,
             'note' => $request->note,
         ]);
+        if ($order->balance <= 0) {
+            $shipping = $order->shipping;
+            $order->shipping->update([
+                'status' => 'Prepared',
+            ]);
+        }
         return redirect()->route('admin.order.detail',$order_id)->with('success', 'Receipt updated successfully');
     }
 
