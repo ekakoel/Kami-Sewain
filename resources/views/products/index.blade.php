@@ -104,7 +104,12 @@
                                             <div class="card-title">
                                                 {{ $product->name }}
                                             </div>
-                                            <p>{{ $product->model->name }} | {{ $product->material->name }}</p>
+                                            <div class="text-left">
+
+                                                <b>
+                                                    Rp {{ number_format($product->price, 0, ',', '.') }}
+                                                </b>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

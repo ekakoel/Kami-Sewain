@@ -120,7 +120,9 @@
                                     <div class="card-title">{{ $popular_product->name }}</div>
                                 </div>
                                 <div class="col-12 text-left">
-                                    <span>{{ $popular_product->model?->name }} - {{ $popular_product->material?->name }}</span>
+                                    <b>
+                                        Rp {{ number_format($popular_product->price, 0, ',', '.') }}
+                                    </b>
                                 </div>
                             </div>
                         </div>
