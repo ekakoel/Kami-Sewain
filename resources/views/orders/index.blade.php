@@ -43,13 +43,30 @@
                   </thead>
                   <tbody>
                     @foreach ($orders as $no=>$order)
+                      @php
+                        if ($order->discount_amount) {
+                            $grand_total = $order->total_price - $order->discount_amount;
+                        }else {
+                            $grand_total = $order->total_price;
+                        }
+                        if ($order->discount_percent) {
+                            $grand_total = $order->total_price - ($order->total_price * ($order->discount_percent / 100));
+                        }else {
+                            $grand_total = $order->total_price;
+                        }
+                      @endphp
                       <tr>
                         <td class="text-center">
                           {{ ++$no }}
                         </td>
                         <td>{{ $order->order_no }}</td>
                         <td>{{ date('d M Y',strtotime($order->rental_start_date)) }} - {{ date('d M Y',strtotime($order->rental_end_date)) }}</td>
-                        <td>Rp {{ number_format($order->total_price, 0, ",", ".") }}</td>
+                        <td>
+                          @if ($order->discount_amount or $order->discount_percent)
+                              <span class="span-disc">Disc</span>
+                          @endif
+                          Rp {{ number_format($grand_total, 0, ",", ".") }} 
+                        </td>
                         <td>{{ $order->status }}</td>
                         <td>
                           <div class="table-action-container">
@@ -109,18 +126,35 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($order_history as $no=>$order)
+                    @foreach ($order_history as $no=>$h_order)
+                      @php
+                        if ($h_order->discount_amount) {
+                            $h_grand_total = $h_order->total_price - $h_order->discount_amount;
+                        }else {
+                            $h_grand_total = $h_order->total_price;
+                        }
+                        if ($h_order->discount_percent) {
+                            $h_grand_total = $h_order->total_price - ($h_order->total_price * ($h_order->discount_percent / 100));
+                        }else {
+                            $h_grand_total = $h_order->total_price;
+                        }
+                      @endphp
                       <tr>
                         <td class="text-center">
                           {{ ++$no }}
                         </td>
-                        <td>{{ $order->order_no }}</td>
-                        <td>{{ date('d M Y',strtotime($order->rental_start_date)) }} - {{ date('d M Y',strtotime($order->rental_end_date)) }}</td>
-                        <td>Rp {{ number_format($order->total_price, 0, ",", ".") }}</td>
-                        <td>{{ $order->status == "Payment"?"Canceled":$order->status; }}</td>
+                        <td>{{ $h_order->order_no }}</td>
+                        <td>{{ date('d M Y',strtotime($h_order->rental_start_date)) }} - {{ date('d M Y',strtotime($h_order->rental_end_date)) }}</td>
+                        <td>
+                          @if ($h_order->discount_amount or $h_order->discount_percent)
+                              <span class="span-disc">Disc</span>
+                          @endif
+                          Rp {{ number_format($h_grand_total, 0, ",", ".") }} 
+                        </td>
+                        <td>{{ $h_order->status == "Payment"?"Canceled":$h_order->status; }}</td>
                         <td>
                           <div class="table-action-container">
-                            <a href="{{ route('orders.detail',$order->order_no) }}">
+                            <a href="{{ route('orders.detail',$h_order->order_no) }}">
                               <i class="fa-solid fa-eye"></i>
                             </a>
                           </div>

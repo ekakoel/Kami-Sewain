@@ -380,6 +380,12 @@ header{
 .table th, .table td {
   vertical-align: middle;
 }
+.table td .span-disc{
+  background-color: #00b8ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: white;
+}
 .order-item {
   display: flex;
   align-items: center;

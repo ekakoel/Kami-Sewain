@@ -132,7 +132,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-        
                                     <h4>Rental Details</h4>
                                     <div class="form-group">
                                         <label for="rental_start_date">Rental Start Date</label>

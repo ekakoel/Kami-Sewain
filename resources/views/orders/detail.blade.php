@@ -117,7 +117,7 @@
                                             @endif
                                             <tr>
                                                 <td colspan="4" class="text-right"> <strong>Grand Total</strong></td>
-                                                <td class="text-right"> <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong></td>
+                                                <td class="text-right"> <strong>Rp {{ number_format($order->balance, 0, ',', '.') }}</strong></td>
                                             </tr>
                                             @if (count($receipt_paids)>0)
                                               @foreach ($receipt_paids as $nop=>$paid)

@@ -119,11 +119,11 @@
                             Messages
                         </a>
                         @isDeveloper
-                        <div class="sb-sidenav-menu-heading">Users</div>
-                        <a class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            User Manager
-                        </a>
+                            <div class="sb-sidenav-menu-heading">Users</div>
+                            <a class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                                User Manager
+                            </a>
                         @endIsDeveloper
                     </div>
                 </div>

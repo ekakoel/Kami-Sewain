@@ -118,9 +118,23 @@
                                                 <td class="text-right">{{ $order->rental_duration }}
                                                     {{ $order->rental_duration > 1 ? 'Days' : 'Day' }}</td>
                                             </tr>
+                                            @if ($order->discount_amount or $order->discount_percent)
+                                                <tr>
+                                                    <td colspan="4" class="text-right">Total</td>
+                                                    <td class="text-right">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="text-right">Promotion / Discount</td>
+                                                    @if ($order->discount_amount)
+                                                        <td class="text-right color-secondary">- Rp {{ number_format($order->discount_amount, 0, ',', '.') }}</td>
+                                                    @elseif($order->discount_percent)
+                                                        <td class="text-right color-secondary">- ({{ $order->discount_percent }}%) Rp {{ number_format((($order->total_price / 100)*$order->discount_percent), 0, ',', '.') }}</td>
+                                                    @endif
+                                                </tr>
+                                            @endif
                                             <tr>
                                                 <td colspan="4" class="text-right"> <strong>Grand Total</strong></td>
-                                                <td class="text-right"> <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong></td>
+                                                <td class="text-right"> <strong>Rp {{ number_format($order->balance, 0, ',', '.') }}</strong></td>
                                             </tr>
                                             @if (count($receipt_paids)>0)
                                                 @foreach ($receipt_paids as $nop=>$paid)
