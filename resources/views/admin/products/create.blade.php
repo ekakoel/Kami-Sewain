@@ -41,9 +41,8 @@
                                      <!-- Cover Image -->
                                      <div class="form-group">
                                         <label for="cover">Cover Image</label>
-                                        <!-- Pratinjau Cover Image -->
                                         <div class="form-cover-img-preview">
-                                            <img id="coverPreview" src="" alt="" width="100">
+                                            <img id="coverPreview" src="{{ asset('images/properties/default-img.jpg') }}" alt="" width="100">
                                         </div>
                                         <input id="cover" type="file" name="cover" class="form-control @error('cover') is-invalid @enderror" onchange="previewCoverImage(event)" value="{{ old('cover') }}">
                                     </div>
@@ -110,12 +109,13 @@
                                         @enderror
                                     </div>
         
-                                    <div class="form-group">
-                                        <label for="color_id">Choose Color<span>*</span></label>
-                                        <select id="color_id" name="color_id" class="form-control @error('color_id') is-invalid @enderror">
-                                            <option selected value="">Select Color</option>
+                                    <div class="form-group color-select">
+                                        <label for="color_id">Select Color<span>*</span></label>
+                                        <div id="colorPalate" class="color-palate"></div>
+                                        <select id="color_id" name="color_id" class="form-control custom-color-select @error('color_id') is-invalid @enderror" onchange="updateSelectColor()">
+                                            <option selected value="" style="color:#000; background-color: #fff !important;">Select Color</option>
                                             @foreach ($colors as $color)
-                                                <option value="{{ $color->id }}" class="color-option" data-color="{{ $color->name }}">⬤ {{ $color->name }}</option>
+                                                <option value="{{ $color->id }}" style="color:{{ $color->code }} !important" class="color-option" data-color="{{ $color->name }}">{{ $color->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('color_id')
@@ -239,4 +239,15 @@
             });
         });
     </script>
+    <script>
+        function updateSelectColor() {
+            var select = document.getElementById('color_id');
+            var colorPalate = document.getElementById('colorPalate');
+            var selectedOption = select.options[select.selectedIndex];
+            var colorCode = selectedOption.getAttribute('data-color');
+            colorPalate.style.backgroundColor = colorCode || '#fff';
+        }
+        document.addEventListener("DOMContentLoaded", updateSelectColor);
+    </script>
+    
 @endsection

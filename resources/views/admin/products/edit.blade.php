@@ -113,16 +113,31 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="color">Choose Color {{ $product->color?->name }}<span>*</span></label>
-                                        <select name="color" class="form-select form-select-sm mt-3">
+
+                                    {{-- Lanjutkan ini --}}
+                                    {{-- <div class="form-group">
+                                        <label for="color">Select Color {{ $product->color?->name }}<span>*</span></label>
+                                        <div id="colorPalate" class="color-palate"></div>
+                                        <select name="color" class="form-control custom-color-select">
                                             <option value="" {{ $product->color_id ? 'selected' : '' }}>Select Color</option>
                                             @foreach ($colors as $color)
-                                                <option {{ $product->color?->name === $color->name ? "selected" : "" }} value="{{ $color->id }}" class="color-option" data-color="{{ $color->name }}">⬤ {{ $color->name }}</option>
+                                                <option {{ $product->color?->name === $color->name ? "selected" : "" }} value="{{ $color->id }}" class="color-option" data-color="{{ $color->name }}">{{ $color->name }}</option>
                                             @endforeach
                                         </select>
+                                    </div> --}}
+                                    <div class="form-group color-select">
+                                        <label for="color_id">Select Color<span>*</span></label>
+                                        <div id="colorPalate" class="color-palate"></div>
+                                        <select id="color_id" name="color_id" class="form-control custom-color-select @error('color_id') is-invalid @enderror" onchange="updateSelectColor()">
+                                            <option value="" style="color:#000; background-color: #fff !important;">Select Color</option>
+                                            @foreach ($colors as $color)
+                                                <option {{ $product->color?->name === $color->name ? "selected" : "" }} value="{{ $color->id }}" style="color:{{ $color->code }} !important" class="color-option" data-color="{{ $color->name }}">{{ $color->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('color_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-        
                                     <div class="form-group">
                                         <label for="price">Price<span>*</span></label>
                                         <input id="price" type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $product->price }}" required>
@@ -277,5 +292,15 @@
             });
         }
     });
+    </script>
+    <script>
+        function updateSelectColor() {
+            var select = document.getElementById('color_id');
+            var colorPalate = document.getElementById('colorPalate');
+            var selectedOption = select.options[select.selectedIndex];
+            var colorCode = selectedOption.getAttribute('data-color');
+            colorPalate.style.backgroundColor = colorCode || '#fff';
+        }
+        document.addEventListener("DOMContentLoaded", updateSelectColor);
     </script>
 @endsection

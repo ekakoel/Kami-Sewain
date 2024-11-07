@@ -692,6 +692,25 @@ header{
   z-index: 1;
   border-radius: 50%;
 }
+.color-select{
+  position: relative;
+}
+.color-select .color-palate{
+  position: absolute;
+    width: 35px;
+    height: 35.2px;
+    left: 0px;
+    bottom: 0px;
+    z-index: 9;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #cfcfcf;
+}
+
+
+.custom-color-select{
+  position: relative;
+  padding-left: 45px !important;
+}
 
 .carousel-control.prev {
   left: 10px;

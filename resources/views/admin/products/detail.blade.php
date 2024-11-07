@@ -47,7 +47,7 @@
                                     </div>
                                     <p><strong>Category:</strong> {{ $product->category->name ?? 'N/A' }}</p>
                                     <p><strong>Material:</strong> {{ $product->material->name ?? 'N/A' }}</p>
-                                    <p><strong>Color:</strong> {{ $product->color->name ?? 'N/A' }}</p>
+                                    <p><strong>Color:</strong> <span style="color: {{ $product->color->color_code }} !important; font-size: 1.6rem; line-height: 1;">■</span> {{ $product->color->name ?? 'N/A' }}</p>
                                     <p><strong>Available Stock:</strong> {{ $product->stock }}</p>
                                     <p><strong>Price:</strong> Rp {{ number_format($product->price, 2) }}</p>
                                     <p><strong>Description:</strong> {{ $product->description }}</p>
