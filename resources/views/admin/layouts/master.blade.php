@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Admin - @yield('title')</title>
+    <title>Admin {{ env('APP_NAME') }} - @yield('title')</title>
     <!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="icons/kami_sewain_30_x_30.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="icons/kami_sewain_30_x_30.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="icons/kami_sewain_30_x_30.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/kami_sewain_30_x_30.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/kami_sewain_30_x_30.png') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/kami_sewain_30_x_30.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('icons/kami_sewain_30_x_30.png') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -103,15 +104,27 @@
                             <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                             Orders
                             @php
-                                $commentCount = \App\Models\Orders::where('status','Payment')->count(); // Hitung jumlah komentar
+                                $commentCount = \App\Models\Orders::where('status','Payment')->count();
                             @endphp
                             @if($commentCount > 0)
-                                <span class="badge bg-danger">{{ $commentCount }}</span> <!-- Tampilkan badge jika ada komentar -->
+                                <span class="badge bg-danger">{{ $commentCount }}</span>
                             @endif
                         </a>
                         <a class="nav-link {{ Route::is('admin.shippings') ? 'active' : '' }}" href="{{ route('admin.shippings') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-truck"></i></div>
                             Shipping
+                            @php
+                                $ready_shipping = \App\Models\Shippings::where('status','Ready')->count();
+                                $prepared_shipping = \App\Models\Shippings::where('status','Prepared')->count();
+                            @endphp
+                            <div class="nav-link-span-container">
+                                @if($prepared_shipping > 0)
+                                    <div class="badge bg-primary">P {{ $prepared_shipping }}</div>
+                                @endif
+                                @if($ready_shipping > 0)
+                                    <div class="badge bg-danger">R {{ $ready_shipping }}</div>
+                                @endif
+                            </div>
                         </a>
                         <div class="sb-sidenav-menu-heading">Contact</div>
                         <a class="nav-link {{ Route::is('admin.contacts') ? 'active' : '' }}" href="{{ route('admin.contacts') }}">

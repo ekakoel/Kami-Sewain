@@ -80,7 +80,7 @@
                     <div class="col-md-9">
                         <div id="productsContainer" class="product-filter-container">
                             @foreach ($products as $index => $product)
-                                <div id="categoryProduct-{{ $index }}" class="product-card" data-type="{{ $product->model->name }}" data-category="{{ $product->category->name }}" data-color="{{ $product->color->name }}" data-material="{{ $product->material->name }}" data-id="{{ $product->id }}" data-product-id="{{ $index }}">
+                                <div id="categoryProduct-{{ $index }}" class="product-card" data-type="{{ $product->model?->name }}" data-category="{{ $product->category?->name }}" data-color="{{ $product->color?->name }}" data-material="{{ $product->material?->name }}" data-id="{{ $product->id }}" data-product-id="{{ $index }}">
                                     <div class="card h-100">
                                         <div class="card-img-service">
                                             <img class="product-img" onclick="openModal({{ $product->id }})" src="{{ asset('images/products/' . $product->cover) }}" alt="{{ $product->alt }}" />

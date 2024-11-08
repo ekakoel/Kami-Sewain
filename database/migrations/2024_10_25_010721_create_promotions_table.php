@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('promotion_code')->nullable();
             $table->string('discount_percent')->nullable();
             $table->string('discount_amount')->nullable();
+            $table->string('minimum_transaction');
             $table->string('amount');
             $table->string('expired_date');
             $table->longText('description');

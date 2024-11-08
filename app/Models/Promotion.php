@@ -14,6 +14,7 @@ class Promotion extends Model
         'promotion_code',
         'discount_percent',
         'discount_amount',
+        'minimum_transaction',
         'amount',
         'expired_date',
         'description',

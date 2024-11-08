@@ -136,6 +136,13 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="minimum_transaction">Minimum Transaction</label>
+                                                    <input type="text" class="form-control @error('minimum_transaction') is-invalid @enderror" id="minimum_transaction" name="minimum_transaction" value="{{ $promo->minimum_transaction }}" required>
+                                                    @error('minimum_transaction')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="edit_amount">Amount</label>
                                                     <input type="number" min="1" class="form-control @error('amount') is-invalid @enderror" id="edit_amount" name="amount" value="{{ $promo->amount }}" required>
                                                     @error('amount')
@@ -208,6 +215,13 @@
                                         <label for="discount_percent">Discounts (%)</label>
                                         <input type="number" max="50" class="form-control @error('discount_percent') is-invalid @enderror" id="discount_percent" name="discount_percent" value="{{ old('discount_percent') }}">
                                         @error('discount_percent')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group" id="minimumTransaction">
+                                        <label for="minimum_transaction">Minimum Transaction</label>
+                                        <input type="text" class="form-control @error('minimum_transaction') is-invalid @enderror" id="minimum_transaction" name="minimum_transaction" value="{{ old('minimum_transaction') }}">
+                                        @error('minimum_transaction')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>

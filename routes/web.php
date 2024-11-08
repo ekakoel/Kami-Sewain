@@ -136,7 +136,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/portfolio/{id}', [BlogPostController::class, 'detail_portfolio'])->name('admin.portfolio.detail');
             Route::get('/portfolio/{id}/edit', [BlogPostController::class, 'edit_portfolio'])->name('admin.portfolio.edit');
             Route::put('/portfolio/{id}/update', [BlogPostController::class, 'update'])->name('admin.portfolio.update');
-            Route::get('/portfolio/destroy/{id}', [BlogPostController::class, 'destroy_portfolio'])->name('admin.portfolio.destroy');
+            Route::delete('/portfolio/destroy/{id}', [BlogPostController::class, 'destroy'])->name('admin.portfolio.destroy');
             Route::post('/portfolio/{post}/comments', [BlogCommentController::class, 'store_comment'])->name('portfolio.comments.store');
             Route::post('/comment/approve', [BlogCommentController::class, 'approveComment'])->name('comment.approve');
             

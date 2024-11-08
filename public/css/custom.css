@@ -136,6 +136,24 @@ aside{
     transform: translate(0, -50%);
 }
 
+  .nav-link .nav-link-span-container{
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -36%);
+  }
+  .nav-link .nav-link-span-container .badge{
+    margin-right: 5px;
+    border-radius: 20px !important;
+    font-weight: 200 !important;
+    font-size: 0.8rem !important;
+    cursor: pointer;
+    text-transform: capitalize;
+    margin-bottom: 8px;
+    padding: 3px 6px 1px 6px !important;
+    line-height: 1 !important;
+  }
 .status-blocked{
   font-size: 1rem;
   font-weight: 500;
@@ -524,9 +542,15 @@ header{
     margin-right: 5px;
   }
   .tag-badge{
+    border: 1px solid #005e83;
     padding: 2px 8px;
     border-radius: 4px;
-    color: white;
+    color: #005e83 !important;
+    background-color: #ffffff !important;
+    
+  }
+  .tag-badge:is(:hover,:active){
+    color: white !important;
     background-color: #005e83 !important;
   }
   .tag-badge::before{

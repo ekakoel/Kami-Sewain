@@ -93,20 +93,7 @@ class OrdersController extends Controller
             $cord = 0;
         }
         $promo = session()->get('promotion', null);
-        if ($promo) {
-            $promotion = Promotion::where('id',$promo['id'])->first();
-            if ($promotion) {
-                $discount_percent = $promotion->discount_percent;
-                $discount_amount = $promotion->discount_amount;
-                $user->promotions()->updateExistingPivot($promotion->id, ['status' => 'Used']);
-            }else{
-                $discount_percent = NULL;
-                $discount_amount = NULL;
-            }
-        }else{
-            $discount_percent = NULL;
-            $discount_amount = NULL;
-        }
+        
         $corders = $cord + 1;
         $rental_start_date = date('Y-m-d',strtotime($request->rental_start_date));
         $rental_end_date = date('Y-m-d',strtotime($request->rental_end_date));
@@ -119,15 +106,39 @@ class OrdersController extends Controller
         $total = array_sum(array_map(fn($details) => $details['quantity'] * $details['price'], $cart));
         $total_price = $total * $rentalDuration;
         $balance = $total_price;
+        $total_discount = 0;
+        $grand_total = $total_price;
         $payment_duedate = $rentalStartDate->subDays(7);
         $payment_method = "Bank Transfer";
-        if ($discount_percent > 0 ) {
-            $discount = ($discount_percent / 100) * $total_price;
-            $balance -= $discount;
-            
-        }elseif($discount_amount>0){
-            $balance = $total_price - $discount_amount;
+        if ($promo) {
+            $promotion = Promotion::where('id',$promo['id'])->first();
+            if ($promotion) {
+                $discount_percent = $promotion->discount_percent;
+                $discount_amount = $promotion->discount_amount;
+
+                if ($discount_percent > 0 ) {
+                    $discount = ($discount_percent / 100) * $total_price;
+                    $balance -= $discount;
+                    $total_discount = $discount;
+                    $grand_total = $balance;
+                    $user->promotions()->updateExistingPivot($promotion->id, ['status' => 'Used']);
+                }elseif($discount_amount > 0){
+                    if ($total_price > $promotion->minimum_transaction) {
+                        $balance = $total_price - $discount_amount;
+                        $total_discount = $discount_amount;
+                        $grand_total = $balance;
+                        $user->promotions()->updateExistingPivot($promotion->id, ['status' => 'Used']);
+                    }
+                }
+            }else{
+                $discount_percent = 0;
+                $discount_amount = 0;
+            }
+        }else{
+            $discount_percent = 0;
+            $discount_amount = 0;
         }
+        
         $payment_status = "Unpaid";
         $order = Orders::create([
             'order_no' => $orderno,
@@ -140,6 +151,8 @@ class OrdersController extends Controller
             'total_price' => $total_price,
             'discount_percent' => $discount_percent,
             'discount_amount' => $discount_amount,
+            'total_discount' => $total_discount,
+            'grand_total' => $grand_total,
             'balance' => $balance,
             'payment_duedate' => $payment_duedate,
             'payment_method' => $payment_method,

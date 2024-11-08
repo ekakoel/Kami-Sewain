@@ -133,50 +133,63 @@
                                 <div class="row">
                                     @if (count($promotions)>0)
                                         <div class="col-md-12 text-right">
-                                            <div class="btn-container">
-                                                @if (session('promotion'))
-                                                    @php
-                                                        $promo = $promos->where('id',session('promotion')['id'])->first();
-                                                    @endphp
-                                                    <a data-toggle="modal" data-target="#addPromo" type="button">
-                                                        <button type="submit" class="btn btn-primary">Change Promo</button>
-                                                    </a>
+                                            @if (session('promotion'))
+                                                @php
+                                                    $promo = $promos->where('id',session('promotion')['id'])->first();
+                                                    $total_transaction = array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart')));
+                                                @endphp
+                                                <p style="text-transform: uppercase">{{ $promo->name }}</p>
+                                                @if ($promo->minimum_transaction > $total_transaction)
+                                                    <p style="color:brown !important;">You cannot use this promotion because of the minimum transaction</p>
+                                                @endif
+                                                <div class="btn-container">
+                                                    @if (count($promotions)>1)
+                                                        <a data-toggle="modal" data-target="#addPromo" type="button">
+                                                            <button type="submit" class="btn btn-primary">Change Promo</button>
+                                                        </a>
+                                                    @endif
                                                     <form action="{{ route('promotion.remove') }}" method="POST">
                                                         @csrf
                                                         <button type="submit" class="btn btn-danger">Remove Promo</button>
                                                     </form>
-                                                @else
+                                                </div>
+                                            @else
+                                                <div class="btn-container">
                                                     <a data-toggle="modal" data-target="#addPromo" type="button">
                                                         <button type="submit" class="btn btn-primary">Add Promo</button>
                                                     </a>
-                                                @endif
-                                            </div>
+                                                </div>
+                                            @endif
                                         </div>
                                         @if (session('promotion'))
-                                            <div class="col-md-6"><p>Total</p></div>
-                                            <div class="col-md-6 text-right"><p>Rp {{ number_format(array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart'))), 0, ",", ".") }}</p></div>
-                                            <div class="col-md-6"><p>Promotion</p></div>
-                                            @if ($promo->discount_percent)
-                                                @php
-                                                    $ttl = array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart')));
-                                                    $total = ($ttl / 100)*$promo->discount_percent;
-                                                    $grand_total = $ttl - $total;
-                                                @endphp
-                                                <div class="col-md-6 text-right color-secondary"><p>({{ $promo->discount_percent }}%) Rp {{ number_format($total, 0, ",", ".") }}</p></div>
-                                            @elseif ($promo->discount_amount)
-                                                @php
-                                                    $ttl = array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart')));
-                                                    $grand_total = $ttl - $promo->discount_amount;
-                                                @endphp
-                                                <div class="col-md-6 text-right color-secondary"><p>Rp {{ number_format($promo->discount_amount, 0, ",", ".") }}</p></div>
+                                            @if ($promo->minimum_transaction <= $total_transaction)
+                                                <div class="col-md-6"><p>Total</p></div>
+                                                <div class="col-md-6 text-right"><p>Rp {{ number_format(array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart'))), 0, ",", ".") }}</p></div>
+                                                <div class="col-md-6"><p>Promotion</p></div>
+                                                @if ($promo->discount_percent)
+                                                    @php
+                                                        $ttl = array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart')));
+                                                        $total = ($ttl / 100)*$promo->discount_percent;
+                                                        $grand_total = $ttl - $total;
+                                                    @endphp
+                                                    <div class="col-md-6 text-right color-secondary"><p>({{ $promo->discount_percent }}%) Rp {{ number_format($total, 0, ",", ".") }}</p></div>
+                                                @elseif ($promo->discount_amount)
+                                                    @php
+                                                        $ttl = array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart')));
+                                                        $grand_total = $ttl - $promo->discount_amount;
+                                                    @endphp
+                                                    <div class="col-md-6 text-right color-secondary"><p>Rp {{ number_format($promo->discount_amount, 0, ",", ".") }}</p></div>
+                                                @endif
+                                                <div class="col-md-6"><p>Grand Total</p></div>
+                                                <div class="col-md-6 text-right"><p><strong>Rp {{ number_format($grand_total, 0, ",", ".") }}</strong></p></div>
+                                            @else
+                                                <div class="col-md-6"><p>Total</p></div>
+                                                <div class="col-md-6 text-right"><p><strong>Rp {{ number_format(array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart'))), 0, ",", ".") }}</strong></p></div>
                                             @endif
-                                            <div class="col-md-6"><p>Grand Total</p></div>
-                                            <div class="col-md-6 text-right"><p><strong>Rp {{ number_format($grand_total, 0, ",", ".") }}</strong></p></div>
                                         @else
                                             <div class="col-md-6"><p>Total</p></div>
                                             <div class="col-md-6 text-right"><p><strong>Rp {{ number_format(array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart'))), 0, ",", ".") }}</strong></p></div>
                                         @endif
-                                    
                                     @else
                                         <div class="col-md-6"><p>Total</p></div>
                                         <div class="col-md-6 text-right"><p><strong>Rp {{ number_format(array_sum(array_map(fn($product) => $product['quantity'] * $product['price'], session('cart'))), 0, ",", ".") }}</strong></p></div>

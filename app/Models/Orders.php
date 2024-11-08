@@ -24,6 +24,8 @@ class Orders extends Model
         'total_price',
         'discount_percent',
         'discount_amount',
+        'total_discount',
+        'grand_total',
         'balance',
         'payment_duedate',
         'payment_status',

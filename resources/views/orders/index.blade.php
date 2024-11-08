@@ -67,7 +67,28 @@
                           @endif
                           Rp {{ number_format($grand_total, 0, ",", ".") }} 
                         </td>
-                        <td>{{ $order->status }}</td>
+                        <td>
+                          {{ $order->status }}
+                          @foreach ($order->receipts as $receipt)
+                            <a href="#" data-toggle="modal" data-target="#receiptDetail{{ $receipt->id }}" type="button"> <i class="fa-solid fa-file-image {{ $receipt->status == "Invalid"?'color-danger':"" }}" data-toggle="tooltip" data-placement="top" title="Receipt {{ date('d M Y',strtotime($receipt->payment_date)) }}"></i></a>
+                            <div class="modal fade" id="receiptDetail{{ $receipt->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myLargeModalLabel">Payment Receipt</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <img class="receipt-img" src="{{ asset('storage/receipts/'.$receipt->receipt_image) }}" alt="Order Receipt">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn button-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          @endforeach
+                        </td>
                         <td>
                           <div class="table-action-container">
                             <a href="{{ route('orders.detail',$order->order_no) }}"><i class="fa-solid fa-eye"></i></a>
@@ -151,7 +172,28 @@
                           @endif
                           Rp {{ number_format($h_grand_total, 0, ",", ".") }} 
                         </td>
-                        <td>{{ $h_order->status == "Payment"?"Canceled":$h_order->status; }}</td>
+                        <td>
+                          {{ $h_order->status == "Payment"?"Canceled":$h_order->status; }}
+                          @foreach ($h_order->receipts as $h_receipt)
+                            <a href="#" data-toggle="modal" data-target="#receiptDetail{{ $h_receipt->id }}" type="button"> <i class="fa-solid fa-file-image {{ $h_receipt->status == "Invalid"?'color-danger':"" }}" data-toggle="tooltip" data-placement="top" title="Receipt {{ date('d M Y',strtotime($h_receipt->payment_date)) }}"></i></a>
+                            <div class="modal fade" id="receiptDetail{{ $h_receipt->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myLargeModalLabel">Payment Receipt</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <img class="receipt-img" src="{{ asset('storage/receipts/'.$h_receipt->receipt_image) }}" alt="Order Receipt">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn button-danger" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          @endforeach
+                        </td>
                         <td>
                           <div class="table-action-container">
                             <a href="{{ route('orders.detail',$h_order->order_no) }}">

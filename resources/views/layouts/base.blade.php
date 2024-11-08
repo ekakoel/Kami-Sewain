@@ -7,10 +7,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{ env('APP_NAME') }} - @yield('title')</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/kami_sewain_30_x_30.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="icons/kami_sewain_30_x_30.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="icons/kami_sewain_30_x_30.png">
-  <link rel="icon" type="image/x-icon" href="icons/kami_sewain_30_x_30.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/kami_sewain_30_x_30.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/kami_sewain_30_x_30.png') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/kami_sewain_30_x_30.png') }}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('icons/kami_sewain_30_x_30.png') }}" />
   <!-- CSS -->
   <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">

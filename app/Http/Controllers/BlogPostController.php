@@ -210,9 +210,17 @@ class BlogPostController extends Controller
     
 
 
-    public function destroy(BlogPost $blogPost)
+    public function destroy($id)
     {
-        $blogPost->delete();
-        return redirect()->route('admin.blogs.index')->with('success', 'Blog post deleted successfully');
+        $portfolio = BlogPost::find($id);
+        if (!$portfolio) {
+            return response()->json(['error' => 'Portfolio not found'], 404);
+        }
+        
+        if (file_exists('images/portfolio/'.$portfolio->featured_image)) {
+            unlink('images/portfolio/'.$portfolio->featured_image);
+        }
+        $portfolio->delete();
+        return redirect()->route('admin.blogs.index')->with('success', 'Portfolio deleted successfully');
     }
 }

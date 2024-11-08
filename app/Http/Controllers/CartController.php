@@ -73,7 +73,7 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         $promotions = $user->promotions()->wherePivot('status', 'Unused')->get();
         $promos = Promotion::where('status','Active')->get();
-        return view('cart.view', compact('cart','business','promotions','promos'));
+        return view('cart.view', compact('user','cart','business','promotions','promos'));
     }
 
     public function removeFromCart($id)
