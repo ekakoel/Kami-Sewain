@@ -347,7 +347,7 @@
                 };
                 const filterBadgesContainer = document.getElementById('filter-badges');
                 let currentPage = 1;
-                const productsPerPage = 16;
+                const productsPerPage = 20;
                 document.querySelectorAll('.filter-btn').forEach(button => {
                     button.addEventListener('click', function () {
                         const filterType = this.getAttribute('data-filter');
