@@ -1988,6 +1988,33 @@ label{
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
+    padding: 18px;
+    border-radius: 8px !important;
+    background-color: #f1f1f1;
+    box-shadow: -2px 2px 5px 0px #00000052;
+    border: 1px solid #bfbfbf;
+  }
+  .img-potrait{
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    padding: 18px;
+    border-radius: 8px !important;
+    background-color: #f1f1f1;
+    box-shadow: -2px 2px 5px 0px #00000052;
+    border: 1px solid #bfbfbf;
+  }
+  .img-landscape img{
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 2;
+    border-radius: 6px !important;
+  }
+  .img-potrait img{
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 2 / 3;
+    border-radius: 6px !important;
   }
   .team img {
       border: 5px solid #fff;
@@ -2050,9 +2077,12 @@ label{
   .slider-controls button:hover {
     color: white;
   }
-  
+.about-title{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 .title{
-  font-family: designkotfmedium;
+  font-family: "designkotfmedium";
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2061,7 +2091,7 @@ label{
   margin-bottom: 0.5em !important;
 }
 .filter-title{
-  font-family: designkotfmedium;
+  font-family: "designkotfmedium";
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2492,11 +2522,22 @@ label{
   font-size: 1.2rem;
   font-weight: 700;
 }
+.visi-misi ol{
+  padding-left: 1rem;
+}
 .visi-misi ol li{
   font-family: designkotflight, "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
   list-style: auto !important;
-  margin-left: 18px;
-  font-size: 0.88em;
+  margin-left: 0;
+  font-size: 1rem;
+  padding-left: 8px;
+}
+.description-business{
+  text-indent: 45px;
+  padding-bottom: 18px;
+}
+.list-business{
+  padding-bottom: 18px;
 }
 .floating-btn {
   position: fixed;

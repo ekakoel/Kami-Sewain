@@ -16,23 +16,30 @@
             <section class="our-story py-5">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-md-12 text-center m-b-45">
-                            <h2 class="font-weight-bold">Our Story</h2>
-                            <p>
-                                Established in 2020, we have grown to become one of the most trusted wedding equipment rental companies in the region. Our mission is to provide elegant, high-quality rental items that elevate your special day and make it unforgettable.
-                            </p>
-                            {!! $business->description !!}
-                        </div>
                         <div class="col-md-6">
+                            <div class="about-title ">Our Story</div>
+                            <div class="description-business">
+                                {!! $business->story !!}
+                            </div>
+                            <div class="about-title">About Us</div>
+                            <div class="description-business">
+                                {!! $business->description !!}
+                            </div>
                             <div class="visi-misi">
-                                <h2 class="font-weight-bold">Vision</h2>
-                                {!! $business->vision !!}
-                                <h2 class="font-weight-bold">Missions</h2>
-                                {!! $business->mission !!}
+                                <div class="about-title">Vision</div>
+                                <div class="description-business">
+                                    {!! $business->vision !!}
+                                </div>
+                                <div class="about-title">Missions</div>
+                                <div class="list-business">
+                                    {!! $business->mission !!}
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img src="{{ asset('images/business/wedding_decoration.jpeg') }}" alt="Wedding Decor" class="img-landscape img-fluid rounded">
+                            <div class="img-potrait">
+                                <img src="{{ asset('images/business/about_us.jpeg') }}" alt="Wedding Decor" class="img-fluid rounded">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,7 +72,7 @@
             <!-- Our Values Section -->
             <section class="our-values py-5">
                 <div class="container text-center">
-                    <h2 class="font-weight-bold m-b-44">Our Values</h2>
+                    <h2 class="about-title m-b-45">Our Values</h2>
                     <div class="row">
                         <div class="col-md-4">
                             <i class="fas fa-gem fa-3x mb-3 text-primary"></i>

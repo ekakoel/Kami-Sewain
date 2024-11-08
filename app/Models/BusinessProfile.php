@@ -12,6 +12,7 @@ class BusinessProfile extends Model
         'logo',
         'logo_alt',
         'business_name',
+        'story',
         'description',
         'vision',
         'mission',

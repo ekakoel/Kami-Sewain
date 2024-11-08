@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('logo', 100);
             $table->string('logo_alt', 100);
             $table->string('business_name', 100);
+            $table->longText('story')->nullable();
             $table->string('caption',255);
             $table->text('description')->nullable();
             $table->longText('vision')->nullable();
