@@ -25,6 +25,7 @@ use App\Http\Controllers\OrderReceiptController;
 use App\Http\Controllers\ProductColorController;
 use App\Http\Controllers\ProductModelController;
 use App\Http\Controllers\ProductMaterialController;
+use App\Http\Controllers\ShippingTransportController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -166,6 +167,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::post('/promotions/store', [PromotionController::class, 'store'])->name('promotions.store');
             Route::put('/promotions/update/{id}', [PromotionController::class, 'update'])->name('promotions.update');
             Route::delete('/promotion/destroy/{id}',  [PromotionController::class, 'destroy'])->name('promotions.destroy');
+
+            // TRANSPORTATIONS
+            Route::get('/transports', [ShippingTransportController::class, 'index'])->name('admin.transports');
+            Route::post('/transport/store', [ShippingTransportController::class, 'store'])->name('admin.transport.store');
+            Route::put('/transport/update/{id}', [ShippingTransportController::class, 'update'])->name('admin.transport.update');
+            Route::delete('/transport/destroy/{id}',  [ShippingTransportController::class, 'destroy'])->name('admin.transport.destroy');
 
             // BLOG
             Route::get('/blog', 'BlogPostController@index')->name('admin.blogs.index');

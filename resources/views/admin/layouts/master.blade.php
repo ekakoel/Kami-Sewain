@@ -96,8 +96,8 @@
                         </a>
                         <div class="sb-sidenav-menu-heading">Promotions</div>
                         <a class="nav-link {{ Route::is('admin.promotions') ? 'active' : '' }}" href="{{ route('admin.promotions') }}">
-                            <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
-                            Promo
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                            Promotions
                         </a>
                         <div class="sb-sidenav-menu-heading">Orders</div>
                         <a class="nav-link {{ Route::is('admin.orders.index') ? 'active' : '' }}" href="{{ route('admin.orders.index') }}">
@@ -111,7 +111,7 @@
                             @endif
                         </a>
                         <a class="nav-link {{ Route::is('admin.shippings') ? 'active' : '' }}" href="{{ route('admin.shippings') }}">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-truck"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-truck-fast"></i></div>
                             Shipping
                             @php
                                 $ready_shipping = \App\Models\Shippings::where('status','Ready')->count();
@@ -125,6 +125,10 @@
                                     <div class="badge bg-danger">R {{ $ready_shipping }}</div>
                                 @endif
                             </div>
+                        </a>
+                        <a class="nav-link {{ Route::is('admin.transports') ? 'active' : '' }}" href="{{ route('admin.transports') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-truck"></i></div>
+                            Transports
                         </a>
                         <div class="sb-sidenav-menu-heading">Contact</div>
                         <a class="nav-link {{ Route::is('admin.contacts') ? 'active' : '' }}" href="{{ route('admin.contacts') }}">

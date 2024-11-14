@@ -75,7 +75,7 @@ class OrderAdminController extends Controller
         $payment_date = date('Y-m-d',strtotime($request->payment_date));
         if ($request->hasFile('receipt_image')) {
             $receipt = time() . '_receipt_'.$order->order_no.".". $request->receipt_image->getClientOriginalExtension();
-            $request->receipt_image->storeAs('public/receipts/', $receipt);
+            $request->receipt_image->storeAs('images/receipts/', $receipt);
         }
         // Create a new receipt entry
         OrderReceipt::create([

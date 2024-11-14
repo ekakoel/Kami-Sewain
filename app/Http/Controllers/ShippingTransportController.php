@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\ShippingTransport;
 use App\Http\Requests\StoreShippingTransportRequest;
 use App\Http\Requests\UpdateShippingTransportRequest;
 
 class ShippingTransportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $now = Carbon::now();
+        $transports = ShippingTransport::all();
+        
+        return view('admin.transports.index', compact('transports','now'));
     }
+
 
     /**
      * Show the form for creating a new resource.

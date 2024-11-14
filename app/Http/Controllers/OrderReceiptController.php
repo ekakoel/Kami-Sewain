@@ -44,7 +44,7 @@ class OrderReceiptController extends Controller
         if ($request->hasFile('receipt_image')) {
             $receipt = time() . '_receipt_'.$order->order_no.".". $request->receipt_image->getClientOriginalExtension();
             // $request->receipt_image->move('images/orders/', $receipt,'public');
-            $request->receipt_image->storeAs('public/receipts/', $receipt);
+            $request->receipt_image->move('storage/receipts/', $receipt);
             // $request->receipt_image->move('images/orders/', $receipt,'publics');
         }
         // Create a new receipt entry

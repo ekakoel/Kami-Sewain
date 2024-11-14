@@ -202,7 +202,7 @@
         
          {{-- PROMOTION --}}
          @if (count($promotions) > 0)
-            <div class="section-container bg-light">
+            <div id="promoSection" class="section-container bg-light">
                 <div class="promo-container">
                     @foreach ($promotions as $promo)
                         @if ($promo->amount > $promo->users->count())
@@ -215,9 +215,13 @@
                                     <div class="promotion-discount">{{ number_format($promo->discount_amount, 0, ",", ".") }} <span class="amount">IDR</span></div>
                                 @endif
                                 @if ($promo->discount_percent)
-                                    <div class="promotion-discount">{!! $promo->discount_percent !!} <span class="percent">%</span></div>
+                                    <div class="promotion-discount">{!! $promo->discount_percent !!} %</div>
                                 @endif
-                                <div class="promotion-content">{!! $promo->description !!}</div>
+                                <div class="promotion-content">
+                                    {!! $promo->description !!}<br>
+                                    Minimum transaction <br>Rp {{ number_format($promo->minimum_transaction, 0, ",", ".") }}
+                                </div>
+                                <div class="promotion-content"></div>
                                 <div class="promotion-footer">
                                     <form action="{{ route('promotions.claim', $promo->id) }}" method="POST">
                                         @csrf
